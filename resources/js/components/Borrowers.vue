@@ -51,42 +51,46 @@
             <div class="tab-pane fade show active" id="personalInfo" role="tabpanel" aria-labelledby="home-tab">
                 <div class="card">
                     <div class="card-body">
-                        <form>
+                        <form id="storeBorrower" @submit.prevent="storeBorrower">
                             <div class="form-group row">
                                 <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="first_name"
-                                           placeholder="Enter First Name" v-model="borrower.first_name">
+                                    <input type="mail" class="form-control" id="first_name"
+                                           placeholder="Enter First Name" v-model="borrower.first_name" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="middle_name" class="col-sm-2 col-form-label">Middle Name</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="middle_name"
-                                           placeholder="Enter Middle Name" v-model="borrower.middle_name">
+                                           placeholder="Enter Middle Name" v-model="borrower.middle_name" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="last_name" name="last_name"
-                                           placeholder="Enter Last Name" v-model="borrower.last_name">
+                                           placeholder="Enter Last Name" v-model="borrower.last_name" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="bod" class="col-sm-2 col-form-label">Birthday</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-control" id="bod" v-model="borrower.birthdate">
+                                    <input type="date" class="form-control" id="bod" v-model="borrower.birthdate" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="gender" class="col-sm-2 col-form-label">Gender</label>
                                 <div class="col-sm-10">
-                                    <v-select v-model="borrower.gender" label="label" :options="genderOptions" id="gender"></v-select>
+                                    <v-select v-model="borrower.gender" label="label" :options="genderOptions" id="gender">
+                                        <input
+                                            :required="true"
+                                        />
+                                    </v-select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="referredBy" class="col-sm-2 col-form-label">Referred By</label>
+                                <label for="referredBy" class="col-sm-2 col-form-label" required>Referred By</label>
                                 <div class="col-sm-10">
                                     <select class="browser-default custom-select" id="referredBy" name="referredBy"
                                             v-model="borrower.referrer">
@@ -112,31 +116,28 @@
                                     <div class="spinner-grow spinner-grow-sm" v-if="loading.cities" role="status">
                                         <span class="sr-only">Loading...</span>
                                     </div>
-                                    <v-select v-model="borrower.city" :options="cityOptions" id="city" label="citymunDesc" v-else></v-select>
+                                    <v-select v-model="borrower.city" :options="selectOptions.cities" id="city" label="citymunDesc" v-else></v-select>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="barangay" class="col-sm-2 col-form-label">Barangay</label>
                                 <div class="col-sm-10">
-                                    <select class="browser-default custom-select" id="barangay" name="barangay">
-                                        <option selected>Select Barangay</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
+                                    <div class="spinner-grow spinner-grow-sm" v-if="loading.barangays" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <v-select v-model="borrower.barangay" :options="selectOptions.barangays" id="barangay" label="brgyDesc" v-else></v-select>
+
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="province" class="col-sm-2 col-form-label">Province</label>
                                 <div class="col-sm-10">
-                                    <select class="browser-default custom-select" id="province" name="province">
-                                        <option selected>Select Province</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
+                                    <div class="spinner-grow spinner-grow-sm" v-if="loading.provinces" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <v-select v-model="borrower.province" :options="selectOptions.provinces" id="province" label="provDesc" v-else></v-select>
                                 </div>
                             </div>
                         </form>
@@ -236,15 +237,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="ctc_place_issued" class="col-sm-2 col-form-label">Place Issued</label>
+                                <label for="ctc_place_issued" class="col-sm-2 col-form-label">City</label>
                                 <div class="col-sm-10">
-                                    <select class="browser-default custom-select" id="ctc_place_issued"
-                                            name="ctc_place_issued">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
+                                    <div class="spinner-grow spinner-grow-sm" v-if="loading.cities" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <v-select v-model="borrower.city" :options="selectOptions.cities" id="ctc_place_issued" label="citymunDesc" v-else></v-select>
                                 </div>
                             </div>
                         </form>
@@ -254,7 +252,7 @@
         </div>
         <div class="form-group row mt-3">
             <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary" @click.prevent="storeBorrower">Create</button>
+                <button type="submit" class="btn btn-primary" form="storeBorrower">Create</button>
             </div>
         </div>
     </section>
@@ -334,7 +332,10 @@
                     referrer: '',
                     brgyCapt: '',
                     dependents: [],
-                    neighbours: []
+                    neighbours: [],
+                    city: '',
+                    barangay: '',
+                    province: ''
                 },
                 modal: false,
                 modalId: '',
@@ -343,13 +344,22 @@
                     {label: 'Female', value: 'F'}
                 ],
                 cityOptions: [],
+                selectOptions:{
+                    cities: [],
+                    barangays: [],
+                    provinces:[]
+                },
                 loading:{
-                    cities: true
+                    cities: true,
+                    barangays: true,
+                    provinces: true
                 }
             }
         },
         created(){
-          this.getCities()
+          this.getCities();
+            this.getBarangays();
+            this.getProvinces();
         },
         methods: {
             storeBorrower() {
@@ -378,14 +388,34 @@
                 this.modal = false;
             },
             getCities(){
-                axios.get('/api/philippines/city')
+                axios.get('/api/philippines/cities')
                     .then(response => {
-                        this.cityOptions = response.data.data;
+                        this.selectOptions.cities = response.data.data;
                     })
                     .catch(e => {
                         console.log(e);
                     })
                     .finally(() => this.loading.cities = false)
+            },
+            getProvinces(){
+                axios.get('/api/philippines/provinces')
+                    .then(response => {
+                        this.selectOptions.provinces = response.data.data;
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    })
+                    .finally(() => this.loading.provinces = false)
+            },
+            getBarangays(){
+                axios.get('/api/philippines/barangays')
+                    .then(response => {
+                        this.selectOptions.barangays = response.data.data;
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    })
+                    .finally(() => this.loading.barangays = false)
             }
         }
     }

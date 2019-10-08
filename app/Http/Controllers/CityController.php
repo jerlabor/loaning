@@ -11,4 +11,5 @@ class CityController extends Controller
     public function getCities(){
         return CityResource::collection(City::all());
     }
+
 }

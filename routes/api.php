@@ -17,5 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/philippines/city','CityController@getCities');
+Route::get('/philippines/cities','CityController@getCities');
+Route::get('/philippines/barangays','BarangayController@getBarangays');
+Route::get('/philippines/provinces','ProvinceController@getProvinces');
 
