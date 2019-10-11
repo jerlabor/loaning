@@ -17,3 +17,4 @@ Auth::routes();
 
 Route::get('/{any}', 'AppController@index')->where('any','.*');
 
+Route::resource('borrower','BorrowerController');
