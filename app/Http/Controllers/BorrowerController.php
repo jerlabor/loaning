@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Borrower;
+use App\Http\Resources\PensionResource;
+use App\Pension;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class BorrowerController extends Controller
 {
@@ -36,7 +39,7 @@ class BorrowerController extends Controller
      */
     public function store(Request $request)
     {
-        DB::transaction(function () use($request){
+        $borrower = DB::transaction(function () use($request){
             $borrower = new Borrower;
 
 
@@ -82,8 +85,15 @@ class BorrowerController extends Controller
 
                 $borrower->spouse()->create(['name' => $request->spouse['name'],'date_married' => $request->spouse['dateMarried'],'POM' => $request->spouse['POM']['id'],'COD' => $request->spouse['COD'],'date_died' => $request->spouse['dateDied']]);
             }
+
+            return $borrower;
         });
 
+        if($borrower){
+            return response(['borrower_id' => $borrower->id],201);
+        }else{
+
+        }
 
     }
 
@@ -130,5 +140,9 @@ class BorrowerController extends Controller
     public function destroy(Borrower $borrower)
     {
         //
+    }
+
+    public function pensions($borrower){
+        return PensionResource::collection(Pension::whereBorrowerId($borrower)->get());
     }
 }

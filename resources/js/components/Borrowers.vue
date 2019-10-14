@@ -507,7 +507,7 @@
 
                 axios.post('/borrower', this.borrower)
                     .then(response => {
-
+                        this.$router.push(`/borrower/${response.data.borrower_id}`)
                     })
                     .catch(e => {
                         console.log(e);

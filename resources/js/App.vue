@@ -31,10 +31,10 @@
                     <mdb-list-group-item :action="true" :class="activeItem === 2 && 'active'"><mdb-icon icon="users" class="mr-3"/>Borrowers</mdb-list-group-item>
                 </router-link>
                 <router-link to="/tables"  @click.native="activeItem = 3">
-                    <mdb-list-group-item :action="true" :class="activeItem === 3 && 'active'"><mdb-icon icon="table" class="mr-3"/>Tables</mdb-list-group-item>
+                    <mdb-list-group-item :action="true" :class="activeItem === 3 && 'active'"><mdb-icon icon="table" class="mr-3"/>Loans</mdb-list-group-item>
                 </router-link>
                 <router-link to="/maps" @click.native="activeItem = 4">
-                    <mdb-list-group-item :action="true" :class="activeItem === 4 && 'active'"><mdb-icon icon="map" class="mr-3"/>Maps</mdb-list-group-item>
+                    <mdb-list-group-item :action="true" :class="activeItem === 4 && 'active'"><mdb-icon icon="map" class="mr-3"/>Collection</mdb-list-group-item>
                 </router-link>
                 <router-link to="/404" @click.native="activeItem = 5">
                     <mdb-list-group-item :action="true" :class="activeItem === 5 && 'active'"><mdb-icon icon="exclamation" class="mr-3"/>404</mdb-list-group-item>
