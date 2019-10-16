@@ -13,7 +13,7 @@
                             John Edward R. Labor
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" @click="logout">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -21,25 +21,48 @@
         </nav>
         <!--/.Navbar-->
         <!-- Sidebar -->
-        <div class="sidebar-fixed position-fixed">
+        <div class="sidenav sidebar-fixed position-fixed">
             <a class="logo-wrapper"><img alt="" class="img-fluid" src="./assets/logo-mdb-vue-small.png"/></a>
-            <mdb-list-group class="list-group-flush">
-                <router-link to="/dashboard" @click.native="activeItem = 1">
-                    <mdb-list-group-item :action="true" :class="activeItem === 1 && 'active'"><mdb-icon icon="chart-pie" class="mr-3"/>Dashboard</mdb-list-group-item>
-                </router-link>
-                <router-link to="/borrowers" @click.native="activeItem = 2">
-                    <mdb-list-group-item :action="true" :class="activeItem === 2 && 'active'"><mdb-icon icon="users" class="mr-3"/>Borrowers</mdb-list-group-item>
-                </router-link>
-                <router-link to="/tables"  @click.native="activeItem = 3">
-                    <mdb-list-group-item :action="true" :class="activeItem === 3 && 'active'"><mdb-icon icon="table" class="mr-3"/>Loans</mdb-list-group-item>
-                </router-link>
-                <router-link to="/maps" @click.native="activeItem = 4">
-                    <mdb-list-group-item :action="true" :class="activeItem === 4 && 'active'"><mdb-icon icon="map" class="mr-3"/>Collection</mdb-list-group-item>
-                </router-link>
-                <router-link to="/404" @click.native="activeItem = 5">
-                    <mdb-list-group-item :action="true" :class="activeItem === 5 && 'active'"><mdb-icon icon="exclamation" class="mr-3"/>404</mdb-list-group-item>
-                </router-link>
-            </mdb-list-group>
+<!--            <mdb-list-group class="list-group-flush">-->
+<!--                <router-link to="/dashboard" @click.native="activeItem = 1">-->
+<!--                    <mdb-list-group-item :action="true" :class="activeItem === 1 && 'active'"><mdb-icon icon="chart-pie" class="mr-3"/>Dashboard</mdb-list-group-item>-->
+<!--                </router-link>-->
+<!--                <router-link to="/borrowers" @click.native="activeItem = 2">-->
+<!--                    <mdb-list-group-item :action="true" :class="activeItem === 2 && 'active'"><mdb-icon icon="users" class="mr-3"/>Borrowers</mdb-list-group-item>-->
+<!--                </router-link>-->
+<!--                <router-link to="/tables"  @click.native="activeItem = 3">-->
+<!--                    <mdb-list-group-item :action="true" :class="activeItem === 3 && 'active'"><mdb-icon icon="table" class="mr-3"/>Loans</mdb-list-group-item>-->
+<!--                </router-link>-->
+<!--                <router-link to="/maps" @click.native="activeItem = 4">-->
+<!--                    <mdb-list-group-item :action="true" :class="activeItem === 4 && 'active'"><mdb-icon icon="map" class="mr-3"/>Collection</mdb-list-group-item>-->
+<!--                </router-link>-->
+<!--                <router-link to="/404" @click.native="activeItem = 5">-->
+<!--                    <mdb-list-group-item :action="true" :class="activeItem === 5 && 'active'"><mdb-icon icon="exclamation" class="mr-3"/>404</mdb-list-group-item>-->
+<!--                </router-link>-->
+<!--            </mdb-list-group>-->
+            <router-link to="/dashboard">Dashboard</router-link>
+            <button class="dropdown-btn">Borrowers
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="#">View Borrowers</a>
+                <router-link to="/borrower/create">Add Borrower</router-link>
+            </div>
+            <button class="dropdown-btn">Loans
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="#">View All Loans</a>
+                <router-link to="/loan/create">Add Loan</router-link>
+            </div>
+            <button class="dropdown-btn">Collections
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
         </div>
         <!-- /Sidebar  -->
         <main>
@@ -76,7 +99,16 @@
             mdbCardBody,
             'ftr': mdbFooter,
             Dashboard,
-        },
+        }
+        ,methods: {
+            logout(){
+                axios.post('/logout')
+                    .then(() => {
+                        window.reload();
+                    })
+            }
+        }
+        ,
         data () {
             return {
                 activeItem: 1
@@ -84,6 +116,22 @@
         },
         beforeMount () {
             this.activeItem = this.$route.matched[0].props.default.page
+        },
+        mounted(){
+            let dropdown = document.getElementsByClassName("dropdown-btn");
+            let i;
+
+            for (i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function() {
+                    this.classList.toggle("sidebar__nav--active");
+                    let dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            }
         },
         mixins: [waves]
     }
@@ -146,6 +194,45 @@
         .flexible-navbar {
             padding-left: 10px;
         }
+    }
+
+    /* Style the sidenav links and the dropdown button */
+    .sidenav a, .dropdown-btn {
+        padding: 10px 8px 10px 16px;
+        text-decoration: none;
+        font-size: 1rem;
+        color: #818181;
+        display: block;
+        border:none;
+        border-bottom: 1px solid #efefef;
+        background: none;
+        width:100%;
+        text-align: left;
+        cursor: pointer;
+        outline: none;
+    }
+
+    /* On mouse-over */
+    .sidenav a:hover, .dropdown-btn:hover {
+        color: #2196f3;
+        background-color: rgba(51, 51, 51, 0.10);
+    }
+
+       /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+    .dropdown-container {
+        display: none;
+        padding-left: 8px;
+    }
+
+    .dropdown-container a {
+        font-size: .8rem;
+        border:none;
+    }
+
+    /* Optional: Style the caret down icon */
+    .fa-caret-down {
+        float: right;
+        padding-right: 8px;
     }
 </style>
 <style>

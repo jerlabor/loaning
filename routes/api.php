@@ -36,7 +36,8 @@ Route::get('/civil-status',function (){
 });
 
 
-
+/*Borrower*/
 Route::get('/borrowers/{borrower}/pensions','BorrowerController@pensions');
 
-
+/*Pension*/
+Route::get('/pension','PensionController@index');

@@ -25,10 +25,18 @@ class Borrower extends Model
         'contact_num'
     ];
 
-//    public function setBirthdayAttribute($value)
-//    {
-//        Carbon::parse($this->attributes['birthday'])->format();
-//    }
+    protected $appends = ['age'];
+    protected $dates = ['birthday'];
+
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->attributes['birthday'])->age;
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->attributes['first_name']} {$this->attributes['middle_name']} {$this->attributes['last_name']}" ;
+    }
 
     public function dependents(){
         return $this->hasMany(\App\Dependent::class);

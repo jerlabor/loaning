@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PensionResource;
 use App\Pension;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class PensionController extends Controller
      */
     public function index()
     {
-        //
+        return PensionResource::collection(Pension::all());
     }
 
     /**
@@ -24,7 +25,7 @@ class PensionController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**

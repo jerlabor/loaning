@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Borrower;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PensionResource extends JsonResource
@@ -14,6 +15,11 @@ class PensionResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'pension' => $this->pension,
+            'links' => $this->links,
+            'borrower' => new BorrowerResource(Borrower::findOrFail($this->borrower_id)),
+        ];
     }
 }

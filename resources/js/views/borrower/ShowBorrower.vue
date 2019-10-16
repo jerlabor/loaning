@@ -199,7 +199,7 @@
                     bank_type:0,
                     payday: null,
                     pension_agency:0,
-                    pension: 0
+                    pension: 0,
                 },
                 pensions: []
             }

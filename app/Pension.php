@@ -25,4 +25,8 @@ class Pension extends Model
         return ['createLoan' => "/{$this->attributes['id']}/loan/create"];
     }
 
+    public function borrower(){
+        return $this->belongsTo(\App\Borrower::class);
+    }
+
 }
