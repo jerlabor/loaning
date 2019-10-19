@@ -41,3 +41,6 @@ Route::get('/borrowers/{borrower}/pensions','BorrowerController@pensions');
 
 /*Pension*/
 Route::get('/pension','PensionController@index');
+
+/*Datatable*/
+Route::get('/datatable/loans','DatatablesController@loans');

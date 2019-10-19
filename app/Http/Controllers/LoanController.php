@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Loan;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class LoanController extends Controller
 {
@@ -35,7 +36,19 @@ class LoanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $loan = new Loan;
+        $loan->pension_code = $request->pension_code['id'];
+        $loan->loan_type = $request->loan_type;
+        $loan->principal_amount = $request->principal_amount;
+        $loan->release_date = $request->release_date;
+        $loan->term = $request->term;
+        $loan->added_by = $request->user()->id;
+
+        if($loan->save()){
+            return response()->json($loan,Response::HTTP_CREATED );
+        }else{
+            return response()->json('',Response::HTTP_CONFLICT );
+        }
     }
 
     /**

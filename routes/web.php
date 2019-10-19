@@ -18,6 +18,11 @@ Auth::routes();
 Route::get('/{any}', 'AppController@index')->where('any','.*');
 
 Route::resource('borrower','BorrowerController');
+
 /*Pension*/
 Route::resource('pension','PensionController');
+
+/*Loan*/
+Route::resource('loan','LoanController');
+
 

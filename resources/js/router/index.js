@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Dashboard from './../components/Dashboard'
-import Tables from './../components/Tables'
-import Maps from './../components/Maps'
 import BadGateway from './../components/BadGateway'
 import ShowBorrower from "../views/borrower/ShowBorrower";
 import LoanCreate from "../views/loan/LoanCreate";
 import BorrowerCreate from "../views/borrower/BorrowerCreate";
+import LoanShow from "../views/loan/LoanShow";
+import LoansByPension from "../views/loan/LoansByPension";
 
 Vue.use(Router)
 
@@ -31,6 +31,13 @@ export default new Router({
             name: 'showBorrower',
             props: { page: 10 },
             component: ShowBorrower
+        }
+        ,
+        {
+            path: '/pension/:pension/loans',
+            name: 'showBorrower',
+            props: { page: 10 },
+            component: LoansByPension
         },
         {
             path: '/loan/create',
@@ -39,10 +46,10 @@ export default new Router({
             component: LoanCreate
         },
         {
-            path: '/maps',
-            name: 'Maps',
+            path: '/loan/:id',
+            name: 'loanShow',
             props: { page: 4 },
-            component: Maps
+            component: LoanShow
         },
         {
             path: '/404',

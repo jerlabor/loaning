@@ -22,7 +22,7 @@ class Pension extends Model
 
     public function getLinksAttribute()
     {
-        return ['createLoan' => "/{$this->attributes['id']}/loan/create"];
+        return ['loans' => "/pension/{$this->attributes['id']}/loans"];
     }
 
     public function borrower(){

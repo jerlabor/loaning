@@ -122,9 +122,9 @@
                                     <td>{{pension.pension_agency}}</td>
                                     <td>{{pension.pension}}</td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm" :href="pension.links.createLoan"><mdb-icon icon="plus"/> Loan</a>
-                                        <a class="btn btn-success btn-sm" :href="pension.links.createLoan"><mdb-icon icon="edit" /></a>
-                                        <a class="btn btn-danger btn-sm" :href="pension.links.createLoan"><mdb-icon far icon="trash-alt" /></a>
+                                        <a class="btn btn-primary btn-sm" :href="pension.links.loans">Loans</a>
+                                        <a class="btn btn-success btn-sm" :href="pension.links.loans"><mdb-icon icon="edit" /></a>
+                                        <a class="btn btn-danger btn-sm" :href="pension.links.loans"><mdb-icon far icon="trash-alt" /></a>
                                     </td>
                                 </tr>
                                 </tbody>
