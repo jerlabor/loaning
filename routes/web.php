@@ -14,9 +14,10 @@
 
 
 Auth::routes();
+Route::get('/model',function(){
 
-Route::get('/{any}', 'AppController@index')->where('any','.*');
-
+    echo dd(\App\User::class);
+});
 Route::resource('borrower','BorrowerController');
 
 /*Pension*/
@@ -24,5 +25,10 @@ Route::resource('pension','PensionController');
 
 /*Loan*/
 Route::resource('loan','LoanController');
+
+Route::get('/{any}', 'AppController@index')->where('any','.*');
+
+
+
 
 

@@ -29,4 +29,8 @@ class Pension extends Model
         return $this->belongsTo(\App\Borrower::class);
     }
 
+    public function loans(){
+        return $this->hasMany(\App\Loan::class,'pension_code');
+    }
+
 }

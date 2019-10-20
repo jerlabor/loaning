@@ -7,7 +7,8 @@ import LoanCreate from "../views/loan/LoanCreate";
 import BorrowerCreate from "../views/borrower/BorrowerCreate";
 import LoanShow from "../views/loan/LoanShow";
 import LoansByPension from "../views/loan/LoansByPension";
-
+import ShowAllBorrowers from "../views/borrower/ShowAllBorrowers"
+import LoansAll from "../views/loan/LoansAll";
 Vue.use(Router)
 
 export default new Router({
@@ -27,6 +28,12 @@ export default new Router({
             component: BorrowerCreate
         },
         {
+            path: '/borrowers',
+            name: 'BorrowerAll',
+            props: { page: 35 },
+            component: ShowAllBorrowers
+        },
+        {
             path: '/borrower/:borrower',
             name: 'showBorrower',
             props: { page: 10 },
@@ -35,7 +42,7 @@ export default new Router({
         ,
         {
             path: '/pension/:pension/loans',
-            name: 'showBorrower',
+            name: 'showLoansByPension',
             props: { page: 10 },
             component: LoansByPension
         },
@@ -50,6 +57,12 @@ export default new Router({
             name: 'loanShow',
             props: { page: 4 },
             component: LoanShow
+        },
+        {
+            path: '/loans',
+            name: 'LoansAll',
+            props: { page: 34 },
+            component: LoansAll
         },
         {
             path: '/404',

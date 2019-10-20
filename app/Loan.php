@@ -27,6 +27,11 @@ class Loan extends Model
 
     public function getMaturityDateAttribute()
     {
-        return $this->release_date->addDays($this->attributes['term'])->toFormattedDateString();
+        return $this->release_date->addMonths($this->attributes['term'])->toFormattedDateString();
+    }
+
+    public function getActionButtonsAttribute()
+    {
+        return '<button class="btn btn-danger btn-sm" >Add Repayment</button>';
     }
 }

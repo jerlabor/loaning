@@ -25,7 +25,7 @@ class Borrower extends Model
         'contact_num'
     ];
 
-    protected $appends = ['age'];
+    protected $appends = ['age','full_name'];
     protected $dates = ['birthday'];
 
     public function getAgeAttribute()

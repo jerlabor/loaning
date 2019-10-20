@@ -45,14 +45,14 @@
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <a href="#">View Borrowers</a>
+                <router-link :to="{name:'BorrowerAll'}">View Borrowers</router-link>
                 <router-link to="/borrower/create">Add Borrower</router-link>
             </div>
             <button class="dropdown-btn">Loans
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <a href="#">View All Loans</a>
+                <router-link :to="{name:'LoansAll'}">View All Loans</router-link>
                 <router-link to="/loan/create">Add Loan</router-link>
             </div>
             <button class="dropdown-btn">Collections

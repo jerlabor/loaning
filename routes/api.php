@@ -39,8 +39,14 @@ Route::get('/civil-status',function (){
 /*Borrower*/
 Route::get('/borrowers/{borrower}/pensions','BorrowerController@pensions');
 
+
 /*Pension*/
 Route::get('/pension','PensionController@index');
 
 /*Datatable*/
-Route::get('/datatable/loans','DatatablesController@loans');
+Route::get('/datatable/pension/{id}/loans','DatatablesController@loansByPension');
+Route::get('/loans','DatatablesController@loans');
+Route::get('/borrowers','DatatablesController@borrowers');
+
+/*Loans*/
+
