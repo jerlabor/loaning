@@ -34,18 +34,25 @@ class DatatablesController extends Controller
     }
 
     public function borrowers(){
+        $q = request()->query('q');
+        $sortBy = request()->query('sortBy');
+        $sortDesc = request()->query('sortDesc');
 
-        $borrowers = Borrower::all();
-
-
+        $borrowers = Borrower::when($q,function ($query,$q){
+            return $query->whereRaw("CONCAT_WS(' ',first_name,middle_name,last_name) LIKE '%{$q}%'");
+        })->when($sortBy,function ($query,$sortBy) use ($sortDesc){
+            $sort = $sortDesc === 'true' ? 'desc' : 'asc';
+            if($sortBy === 'full_name'){
+                return $query->orderByRaw("CONCAT_WS(' ',first_name,middle_name,last_name) {$sort}");
+            }
+            return $query->orderBy($sortBy,$sort);
+        })->latest()->paginate(10);
         return new DatatableCollection($borrowers);
     }
 
     public function loans(){
 
-        $loans = Loan::all();
-
-
+        $loans = Loan::with(['pension.borrower','repaymentSummary'])->latest()->paginate(10);
         return new DatatableCollection($loans);
     }
 }

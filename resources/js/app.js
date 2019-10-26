@@ -11,8 +11,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import vSelect from 'vue-select'
+import BootstrapVue from 'bootstrap-vue'
 
-import 'mdbvue/build/css/mdb.css';
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -31,6 +31,8 @@ import 'mdbvue/build/css/mdb.css';
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+Vue.use(BootstrapVue)
 Vue.component('v-select', vSelect)
 new Vue({
     el: '#app',

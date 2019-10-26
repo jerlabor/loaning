@@ -15,9 +15,12 @@ class CreateRepaymentsTable extends Migration
     {
         Schema::create('repayments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->decimal('repayment_amount',13,4);
+            $table->unsignedBigInteger('loan_id');
+            $table->decimal('amount',13,2);
             $table->unsignedBigInteger('collected_by');
             $table->timestamps();
+            $table->foreign('loan_id')->references('id')->on('loans')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('collected_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

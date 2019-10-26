@@ -37,6 +37,7 @@ class CreateBorrowersTable extends Migration
             $table->foreign('barangay')->references('id')->on('barangays')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('province')->references('id')->on('provinces')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ctc_city_issued')->references('id')->on('cities')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('civil_status')->references('id')->on('civil_statuses')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

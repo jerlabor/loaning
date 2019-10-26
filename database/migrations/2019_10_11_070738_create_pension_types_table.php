@@ -14,7 +14,8 @@ class CreatePensionTypesTable extends Migration
     public function up()
     {
         Schema::create('pension_types', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->tinyIncrements('id');
+            $table->string('pension_type')->unique();
             $table->timestamps();
         });
     }

@@ -23,6 +23,7 @@ class CreateSpouseTable extends Migration
             $table->unsignedBigInteger('borrower_id');
             $table->timestamps();
             $table->foreign('borrower_id')->references('id')->on('borrowers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('POM')->references('id')->on('cities')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

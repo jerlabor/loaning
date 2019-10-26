@@ -49,4 +49,4 @@ Route::get('/loans','DatatablesController@loans');
 Route::get('/borrowers','DatatablesController@borrowers');
 
 /*Loans*/
-
+Route::get('/loan/{loan}','LoanController@show');

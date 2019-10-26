@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+
 
         DB::table('dependent_relations')->insert([
            ['name' => 'Son'],
@@ -24,6 +24,15 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Married'],
             ['name' => 'Widow'],
             ['name' => 'Widower'],
+        ]);
+
+        DB::table('loan_types')->insert([
+            ['loan_type' => 'New'],
+            ['loan_type' => 'Renewal'],
+            ['loan_type' => 'Addition'],
+            ['loan_type' => 'Reactive'],
+            ['loan_type' => 'Advance Bonus'],
+            ['loan_type' => 'Salary'],
         ]);
 
         DB::unprepared("
@@ -61,5 +70,7 @@ class DatabaseSeeder extends Seeder
         INSERT INTO `barangays` VALUES ('9', '012802008', 'Casilian', '01', '0128', '012802');
         INSERT INTO `barangays` VALUES ('10', '012802009', 'Corocor', '01', '0128', '012802');
         ");
+
+         $this->call(BorrowersTableSeeder::class);
     }
 }

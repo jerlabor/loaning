@@ -2,16 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d4892a1-e89e-4360-8ed6-10114e7bf68c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Borrower.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Borrower.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DatatablesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DatatablesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LoanController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/LoanController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RepaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RepaymentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Resources/DatatableCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/DatatableCollection.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Loan.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Loan.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Pension.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Pension.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repayment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repayment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_14_020224_create_loans_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_14_020224_create_loans_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_19_021243_create_repayments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_19_021243_create_repayments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/borrower/ShowAllBorrowers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/borrower/ShowAllBorrowers.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/loan/LoanShow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/loan/LoanShow.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/loan/LoansAll.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/loan/LoansAll.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/views/loan/LoansByPension.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/loan/LoansByPension.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -156,18 +168,19 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/assets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\madayawLoaning\resources\js\views\borrower" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\xampp\htdocs\madayaw\resources\js\assets" />
       <recent name="F:\xampp\htdocs\madayaw\resources\js\components" />
       <recent name="F:\xampp\htdocs\madayaw\resources\views\layouts" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\madayawLoaning\resources\js\views\borrower" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -228,6 +241,7 @@
       <workItem from="1571188023213" duration="3537000" />
       <workItem from="1571290139552" duration="11622000" />
       <workItem from="1571366553379" duration="18184000" />
+      <workItem from="1572051679444" duration="23471000" />
     </task>
     <servers />
   </component>

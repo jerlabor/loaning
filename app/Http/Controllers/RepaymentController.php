@@ -35,7 +35,11 @@ class RepaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $repayment = new Repayment;
+        $repayment->amount = $request->amount;
+        $repayment->loan_id = $request->loan_id;
+        $repayment->collected_by = $request->user()->id;
+        $repayment->save();
     }
 
     /**

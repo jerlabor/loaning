@@ -13,20 +13,22 @@
 
 
 
-Auth::routes();
-Route::get('/model',function(){
+Auth::routes(
+    [
+        'verify' => false,
+        'reset' => false
+    ]
+);
 
-    echo dd(\App\User::class);
-});
-Route::resource('borrower','BorrowerController');
 
-/*Pension*/
-Route::resource('pension','PensionController');
-
-/*Loan*/
-Route::resource('loan','LoanController');
-
+Route::post('/repayment','RepaymentController@store');
+Route::post('/borrower','BorrowerController@store');
+Route::post('/pension','PensionController@store');
+Route::post('/loan','LoanController@store');
 Route::get('/{any}', 'AppController@index')->where('any','.*');
+
+
+
 
 
 

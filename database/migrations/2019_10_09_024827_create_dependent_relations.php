@@ -15,7 +15,7 @@ class CreateDependentRelations extends Migration
     {
         Schema::create('dependent_relations', function (Blueprint $table) {
             $table->tinyIncrements('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

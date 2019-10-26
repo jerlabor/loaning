@@ -1,11 +1,18 @@
-// Vue Select
-@import "~vue-select/src/scss/vue-select.scss";
-
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Vue Select
+@import "~vue-select/src/scss/vue-select";
+
+//BootstrapVue
+@import '~bootstrap-vue';
+
+// MDB
+@import "~mdbvue/build/scss/mdb.lite";
+
+
+
+

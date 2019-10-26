@@ -25,6 +25,13 @@ class CreatePensionsTable extends Migration
             $table->char('payday',2);
             $table->integer('pension');
             $table->timestamps();
+            $table->foreign('borrower_id')->references('id')->on('borrowers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('added_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('pension_type')->references('id')->on('pension_types')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('pension_bank')->references('id')->on('banks')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('bank_type')->references('id')->on('bank_types')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('pension_agency')->references('id')->on('pension_agencies')->onUpdate('cascade')->onDelete('cascade');
+
         });
     }
 
