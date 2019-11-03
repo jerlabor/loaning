@@ -12,8 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
-
         DB::table('dependent_relations')->insert([
            ['name' => 'Son'],
            ['name' => 'Daughter'],
@@ -33,6 +31,32 @@ class DatabaseSeeder extends Seeder
             ['loan_type' => 'Reactive'],
             ['loan_type' => 'Advance Bonus'],
             ['loan_type' => 'Salary'],
+        ]);
+
+
+        DB::table('banks')->insert([
+            ['bank' => 'BPI'],
+            ['bank' => 'Metrobank']
+        ]);
+
+        DB::table('bank_types')->insert([
+            ['bank_type' => 'Passbook'],
+            ['bank_type' => 'ATM']
+        ]);
+
+        DB::table('loan_statuses')->insert([
+            ['loan_status' => 'Current'],
+            ['loan_status' => 'Fully Paid']
+        ]);
+
+        DB::table('pension_agencies')->insert([
+            ['agency' => 'GSIS'],
+            ['agency' => 'SSS']
+        ]);
+
+        DB::table('pension_types')->insert([
+            ['pension_type' => 'SD'],
+            ['pension_type' => 'RT']
         ]);
 
         DB::unprepared("

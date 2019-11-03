@@ -14,7 +14,7 @@ class BankTypeController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(BankType::all(['id','bank_type']));
     }
 
     /**

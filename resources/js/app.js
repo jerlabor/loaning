@@ -9,9 +9,10 @@ require('./bootstrap');
 window.Vue = require('vue');
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import {router} from './router'
 import vSelect from 'vue-select'
 import BootstrapVue from 'bootstrap-vue'
+import store from './store'
 
 /**
  * The following block of code may be used to automatically register your
@@ -34,8 +35,12 @@ import BootstrapVue from 'bootstrap-vue'
 
 Vue.use(BootstrapVue)
 Vue.component('v-select', vSelect)
+
+
+
 new Vue({
     el: '#app',
     router,
+    store,
     components: { App },
-})
+}).$mount('#app')

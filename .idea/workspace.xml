@@ -208,12 +208,12 @@
           <expand>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@122b09a8" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@d43c8b2f" type="7427dc5b:ServiceModel$ServiceGroupNode" />
             </path>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@122b09a8" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@28f585bd" type="9fbbdea:ServiceModel$ServiceNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@d43c8b2f" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@2ebf9e68" type="9fbbdea:ServiceModel$ServiceNode" />
             </path>
           </expand>
           <select />
@@ -241,7 +241,11 @@
       <workItem from="1571188023213" duration="3537000" />
       <workItem from="1571290139552" duration="11622000" />
       <workItem from="1571366553379" duration="18184000" />
+<<<<<<< Updated upstream
       <workItem from="1572051679444" duration="23471000" />
+=======
+      <workItem from="1572326059691" duration="1830000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>

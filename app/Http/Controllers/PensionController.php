@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePension;
 use App\Http\Resources\PensionResource;
 use App\Pension;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class PensionController extends Controller
 {
@@ -34,21 +36,13 @@ class PensionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePension $request)
     {
-        $pension = new Pension();
+       $pension =  Pension::create($request->validated());
 
-        $pension->pension_type = $request->pension_type;
-        $pension->pension_bank = $request->pension_bank;
-        $pension->bank_branch = $request->bank_branch;
-        $pension->bank_type = $request->bank_type;
-        $pension->pension_agency = $request->pension_agency;
-        $pension->payday = $request->payday;
-        $pension->pension = $request->pension;
-        $pension->borrower_id = $request->borrower_id;
-        $pension->added_by = $request->user()->id;
-
-        $pension->save();
+       if($pension){
+           return response()->json($pension,Response::HTTP_OK);
+       }
     }
 
     /**

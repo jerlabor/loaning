@@ -21,8 +21,5 @@ $factory->define(Borrower::class, function (Faker $faker) {
         'civil_status' =>  $faker->numberBetween(1,\App\CivilStatus::all()->count()),
         'other_SOI' => $faker->text,
         'barangay_captain' => $faker->name,
-        'ctc_num' => $faker->randomNumber(),
-        'ctc_date_issued' => $faker->date(),
-        'ctc_city_issued' => $faker->numberBetween(1,\App\City::all()->count()),
     ];
 });

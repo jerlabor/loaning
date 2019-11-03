@@ -14,7 +14,7 @@ class PensionAgencyController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(PensionAgency::all(['id','agency']));
     }
 
     /**

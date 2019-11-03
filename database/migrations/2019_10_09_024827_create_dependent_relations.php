@@ -17,6 +17,7 @@ class CreateDependentRelations extends Migration
             $table->tinyIncrements('id');
             $table->string('name')->unique();
             $table->timestamps();
+
         });
     }
 

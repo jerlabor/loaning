@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Borrower;
+use App\Http\Requests\StoreBorrower;
+use App\Http\Resources\BorrowerResource;
 use App\Http\Resources\PensionResource;
 use App\Pension;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 
 class BorrowerController extends Controller
@@ -37,34 +40,15 @@ class BorrowerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBorrower $request)
     {
+
+
         $borrower = DB::transaction(function () use($request){
-            $borrower = new Borrower;
 
+            $borrower = Borrower::create($request->validated());
 
-            $borrower->first_name = $request->first_name;
-            $borrower->middle_name = $request->middle_name;
-            $borrower->last_name = $request->last_name;
-            $borrower->birthday = $request->birthday;
-            $borrower->gender = $request->gender;
-            $borrower->referrer_id = (int)$request->referrer_id['id'];
-            $borrower->barangay_captain = $request->brgyCapt;
-            $borrower->street = $request->street;
-            $borrower->city = (int)$request->city['id'];
-            $borrower->barangay = (int)$request->barangay['id'];
-            $borrower->province = (int)$request->province['id'];
-            $borrower->other_SOI = $request->otherSOI;
-            $borrower->ctc_num = $request->ctc_num;
-            $borrower->ctc_date_issued = $request->ctc_date_issued;
-            if(isset($request->ctc_date_issued)){
-                $borrower->ctc_city_issued = (int)$request->ctc_city_issued['id'];
-            }
-            $borrower->contact_num = $request->contact_num;
-            $borrower->civil_status = $request->civil_status;
-
-            $borrower->save();
-
+            //Store If Has Dependents
             if(count($request->dependents) !== 0){
                 $dependents = array_map(function ($dependent){
                     return new \App\Dependent(['name' => $dependent['name'],'relation' => (int)$dependent['relationship'],'birthday' => $dependent['birthday']]);
@@ -73,6 +57,7 @@ class BorrowerController extends Controller
                 $borrower->dependents()->saveMany($dependents);
             }
 
+            //Store If Has Neighbours
             if(count($request->neighbours) !== 0){
                 $neighbours = array_map(function ($neighbor){
                     return new \App\Neighbor(['name' => $neighbor['name']]);
@@ -81,9 +66,28 @@ class BorrowerController extends Controller
                 $borrower->neighbours()->saveMany($neighbours);
             }
 
-            if($request->civil_status !== 1){
+            //Add If Has Spouse
+            if($request->civil_status !== 1 && $request->has('spouse')){
 
-                $borrower->spouse()->create(['name' => $request->spouse['name'],'date_married' => $request->spouse['dateMarried'],'POM' => $request->spouse['POM']['id'],'COD' => $request->spouse['COD'],'date_died' => $request->spouse['dateDied']]);
+                $validated = Validator::make($request->spouse,[
+                    'COD' => 'nullable|string',
+                    'POM' => 'required|numeric',
+                    'date_married' => 'required|date',
+                    'date_died' => 'nullable|date',
+                    'name' => 'required|string',
+                ])->validate();
+
+                $borrower->spouse()->create($validated);
+            }
+
+            if($request->has('ctc')){
+                $validated = Validator::make($request->ctc,[
+                    'ctc_num' => 'required|numeric',
+                    'ctc_date_issued' => 'required|date',
+                    'ctc_city_issued' => 'required|numeric',
+                ])->validate();
+
+                $borrower->ctc()->create($validated);
             }
 
             return $borrower;
@@ -105,7 +109,7 @@ class BorrowerController extends Controller
      */
     public function show(Borrower $borrower)
     {
-        //
+        return new BorrowerResource($borrower->load('vPensions'));
     }
 
     /**

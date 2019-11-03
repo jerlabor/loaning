@@ -2,106 +2,118 @@
     <section id="borrower">
         <mdb-modal :show="modal" @close="modal = false">
             <mdb-modal-header class="text-center">
-                <mdb-modal-title tag="h4" bold class="w-100" style="text-transform:capitalize">{{modalId}}
+                <mdb-modal-title bold class="w-100" style="text-transform:capitalize" tag="h4">{{modalId}}
                 </mdb-modal-title>
             </mdb-modal-header>
-            <form action="" :id="modalId" @submit.prevent="storePerson">
+            <form :id="modalId" @submit.prevent="storePerson" action="">
                 <mdb-modal-body class="mx-3 grey-text" v-if="modalId === 'dependent'">
-                    <mdb-input label="Name" icon="user" class="mb-5" size="sm" name="dependentName" required/>
+                    <mdb-input class="mb-5" icon="user" label="Name" name="dependentName" required size="sm"/>
                     <div class="form-group row mb-5">
-                        <label for="relation" class="col-sm-2 col-form-label">
+                        <label class="col-sm-2 col-form-label" for="relation">
                             <mdb-icon icon="handshake" style="font-size: 25px"/>
                         </label>
                         <div class="col-sm-10">
                             <select class="custom-select custom-select-lg" id="relation" name="relationToBorrower"
                                     required>
-                                <option v-for="relation in selectOptions.dependentRelations"
-                                        :value="JSON.stringify(relation)">
+                                <option :value="JSON.stringify(relation)"
+                                        v-for="relation in selectOptions.dependentRelations">
                                     {{relation.name}}
                                 </option>
                             </select>
                         </div>
                     </div>
-                    <mdb-input label="Birthday" icon="calendar" type="date" class="mb-5" size="sm" name="birthday"
-                               required/>
+                    <mdb-input class="mb-5" icon="calendar" label="Birthday" name="birthday" required size="sm"
+                               type="date"/>
                 </mdb-modal-body>
                 <mdb-modal-body class="mx-3 grey-text" v-else>
-                    <mdb-input label="Name" icon="user" class="mb-5" size="sm" name="neighbourName" required/>
+                    <mdb-input class="mb-5" icon="user" label="Name" name="neighbourName" required size="sm"/>
                 </mdb-modal-body>
             </form>
             <mdb-modal-footer center>
-                <input class="btn btn-primary" type="submit" value="Create" :form="modalId">
+                <input :form="modalId" class="btn btn-primary" type="submit" value="Create">
             </mdb-modal-footer>
         </mdb-modal>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="personalInfo-tab" data-toggle="tab" href="#personalInfo" role="tab"
-                   aria-controls="personal" aria-selected="true">Personal Info</a>
+                <a aria-controls="personal" aria-selected="true" class="nav-link active" data-toggle="tab" href="#personalInfo"
+                   id="personalInfo-tab" role="tab">Personal Info</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="dependents-tab" data-toggle="tab" href="#dependents" role="tab"
-                   aria-controls="dependents" aria-selected="false">Dependents/Other Info</a>
+                <a aria-controls="dependents" aria-selected="false" class="nav-link" data-toggle="tab" href="#dependents"
+                   id="dependents-tab" role="tab">Dependents/Other Info</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="miscellaneous-tab" data-toggle="tab" href="#miscellaneous" role="tab"
-                   aria-controls="miscellaneous" aria-selected="false">Miscellaneous</a>
+                <a aria-controls="miscellaneous" aria-selected="false" class="nav-link" data-toggle="tab" href="#miscellaneous"
+                   id="miscellaneous-tab" role="tab">Miscellaneous</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="personalInfo" role="tabpanel" aria-labelledby="home-tab">
+            <div aria-labelledby="home-tab" class="tab-pane fade show active" id="personalInfo" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <form id="storeBorrower" @submit.prevent="storeBorrower">
+                        <form @submit.prevent="storeBorrower" id="storeBorrower">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="form-group row">
-                                        <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
+                                        <label class="col-sm-2 col-form-label" for="first_name">First Name</label>
                                         <div class="col-sm-10">
-                                            <input type="mail" class="form-control" id="first_name"
-                                                   placeholder="Enter First Name" v-model="borrower.first_name" required>
+                                            <input class="form-control" id="first_name" placeholder="Enter First Name"
+                                                   required type="mail"
+                                                   v-model="borrower.first_name">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="middle_name" class="col-sm-2 col-form-label">Middle Name</label>
+                                        <label class="col-sm-2 col-form-label" for="middle_name">Middle Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="middle_name"
-                                                   placeholder="Enter Middle Name" v-model="borrower.middle_name" required>
+                                            <input class="form-control" id="middle_name" placeholder="Enter Middle Name"
+                                                   required type="text"
+                                                   v-model="borrower.middle_name">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
+                                        <label class="col-sm-2 col-form-label" for="last_name">Last Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="last_name" name="last_name"
-                                                   placeholder="Enter Last Name"  v-model="borrower.last_name" required>
+                                            <input class="form-control" id="last_name" name="last_name" placeholder="Enter Last Name"
+                                                   required type="text" v-model="borrower.last_name">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="birthday" class="col-sm-2 col-form-label">Birthday</label>
+                                        <label class="col-sm-2 col-form-label" for="birthday">Birthday</label>
                                         <div class="col-sm-10">
-                                            <input type="date" class="form-control"  v-model="borrower.birthday"id="birthday"
-                                                   required>
+                                            <input class="form-control" id="birthday" required
+                                                   type="date"
+                                                   v-model="borrower.birthday">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="gender" class="col-sm-2 col-form-label">Gender</label>
+                                        <label class="col-sm-2 col-form-label" for="gender">Gender</label>
                                         <div class="col-sm-10">
-                                            <select class="custom-select" id="gender"  v-model="borrower.gender" required>
-                                                <option v-for="gender in genderOptions" :value="gender.id">{{gender.label}}</option>
+                                            <select class="custom-select" id="gender" required
+                                                    v-model="borrower.gender">
+                                                <option :value="gender.id" v-for="gender in genderOptions">
+                                                    {{gender.label}}
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="referredBy" class="col-sm-2 col-form-label">Referred By</label>
+                                        <label class="col-sm-2 col-form-label" for="referredBy">Referred By</label>
                                         <div class="col-sm-10">
-                                            <div class="spinner-grow spinner-grow-sm" v-if="loading.referrers" role="status">
+                                            <div class="spinner-grow spinner-grow-sm" role="status" v-if="isLoading">
                                                 <span class="sr-only">Loading...</span>
                                             </div>
-                                            <v-select v-model="borrower.referrer_id" :options="selectOptions.referrers"
-                                                      id="referredBy" label="name" v-else>
+                                            <v-select
+                                                :options="selectOptions.referrers"
+                                                :reduce="name => name.id"
+                                                id="referredBy"
+                                                label="name"
+                                                v-else
+                                                v-model="borrower.referrer_id"
+                                            >
                                                 <template #search="{attributes, events}">
                                                     <input
-                                                        class="vs__search"
                                                         :required="!borrower.referrer_id"
+                                                        class="vs__search"
                                                         v-bind="attributes"
                                                         v-on="events"
                                                     />
@@ -111,62 +123,74 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="contact_num" class="col-sm-2 col-form-label">Contact Number</label>
+                                        <label class="col-sm-2 col-form-label" for="contact_num">Contact Number</label>
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" id="contact_num"   v-model="borrower.contact_num"required>
+                                            <input class="form-control" id="contact_num" required
+                                                   type="number" v-model="borrower.contact_num">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="civil_status" class="col-sm-2 col-form-label">Civil Status</label>
+                                        <label class="col-sm-2 col-form-label" for="civil_status">Civil Status</label>
                                         <div class="col-sm-10">
-                                            <div class="spinner-grow spinner-grow-sm" v-if="loading.civilStatuses"
-                                                 role="status">
+                                            <div class="spinner-grow spinner-grow-sm" role="status"
+                                                 v-if="isLoading">
                                                 <span class="sr-only">Loading...</span>
                                             </div>
-                                            <select class="custom-select" id="civil_status"  v-model="borrower.civil_status" required>
-                                                <option v-for="status in selectOptions.civilStatuses" :value="status.id">{{status.name}}</option>
+                                            <select class="custom-select" id="civil_status"
+                                                    required v-model="borrower.civil_status">
+                                                <option :value="status.id"
+                                                        v-for="status in selectOptions.civilStatuses">{{status.name}}
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div v-if="borrower.civil_status != '1' && borrower.civil_status">
                                         <div class="form-group row">
-                                            <label for="spouse_name" class="col-sm-2 col-form-label">Spouse Name</label>
+                                            <label class="col-sm-2 col-form-label" for="spouse_name">Spouse Name</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="spouse_name"
-                                                       v-model="borrower.spouse.name">
+                                                <input class="form-control" id="spouse_name" type="text"
+                                                       v-model="spouse.name">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="date_married" class="col-sm-2 col-form-label">Date Married</label>
+                                            <label class="col-sm-2 col-form-label" for="date_married">Date
+                                                Married</label>
                                             <div class="col-sm-10">
-                                                <input type="date" class="form-control" id="date_married"
-                                                       v-model="borrower.spouse.dateMarried">
+                                                <input class="form-control" id="date_married" type="date"
+                                                       v-model="spouse.date_married">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="POM" class="col-sm-2 col-form-label">Place of Marriage</label>
+                                            <label class="col-sm-2 col-form-label" for="POM">Place of Marriage</label>
                                             <div class="col-sm-10">
-                                                <div class="spinner-grow spinner-grow-sm" v-if="loading.cities" role="status">
+                                                <div class="spinner-grow spinner-grow-sm" role="status"
+                                                     v-if="isLoading">
                                                     <span class="sr-only">Loading...</span>
                                                 </div>
-                                                <v-select  :options="selectOptions.cities"
-                                                           id="POM" label="citymunDesc" v-else></v-select>
+                                                <v-select
+                                                    :options="selectOptions.cities"
+                                                    :reduce="citymunDesc => citymunDesc.id"
+                                                    id="POM"
+                                                    label="citymunDesc"
+                                                    v-else
+                                                    v-model="spouse.POM"
+                                                ></v-select>
                                             </div>
                                         </div>
                                         <div v-if="borrower.civil_status == 3 || borrower.civil_status == 4">
                                             <div class="form-group row">
-                                                <label for="COD" class="col-sm-2 col-form-label">Cause of Death</label>
+                                                <label class="col-sm-2 col-form-label" for="COD">Cause of Death</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="COD"
-                                                           v-model="borrower.spouse.COD">
+                                                    <input class="form-control" id="COD" type="text"
+                                                           v-model="spouse.COD">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="date_died" class="col-sm-2 col-form-label">Date Died</label>
+                                                <label class="col-sm-2 col-form-label" for="date_died">Date Died</label>
                                                 <div class="col-sm-10">
-                                                    <input type="date" class="form-control" id="date_died"
-                                                           v-model="borrower.spouse.dateDied">
+                                                    <input class="form-control" id="date_died" type="date"
+                                                           v-model="spouse.date_died">
                                                 </div>
                                             </div>
                                         </div>
@@ -177,26 +201,32 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Address</h5>
                                     <div class="form-group row">
-                                        <label for="address" class="col-sm-2 col-form-label">Street</label>
+                                        <label class="col-sm-2 col-form-label" for="address">Street</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="address" name="address"
-                                                   placeholder="Enter Address" v-model="borrower.street" required>
+                                            <input class="form-control" id="address" name="address" placeholder="Enter Address"
+                                                   required type="text" v-model="borrower.street">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="city" class="col-sm-2 col-form-label">City</label>
+                                        <label class="col-sm-2 col-form-label" for="city">City</label>
                                         <div class="col-sm-10">
-                                            <div class="spinner-grow spinner-grow-sm" v-if="loading.cities"
-                                                 role="status">
+                                            <div class="spinner-grow spinner-grow-sm" role="status"
+                                                 v-if="isLoading">
                                                 <span class="sr-only">Loading...</span>
                                             </div>
-                                            <v-select v-model="borrower.city" :options="selectOptions.cities" id="city"
-                                                      label="citymunDesc" v-else>
+                                            <v-select
+                                                :options="selectOptions.cities"
+                                                :reduce="citymunDesc => citymunDesc.id"
+                                                id="city"
+                                                label="citymunDesc"
+                                                v-else
+                                                v-model="borrower.city"
+                                            >
                                                 <template #search="{attributes, events}">
                                                     <input
-                                                        class="vs__search"
                                                         :required="!borrower.city"
+                                                        class="vs__search"
                                                         v-bind="attributes"
                                                         v-on="events"
                                                     />
@@ -206,18 +236,24 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="barangay" class="col-sm-2 col-form-label">Barangay</label>
+                                        <label class="col-sm-2 col-form-label" for="barangay">Barangay</label>
                                         <div class="col-sm-10">
-                                            <div class="spinner-grow spinner-grow-sm" v-if="loading.barangays"
-                                                 role="status">
+                                            <div class="spinner-grow spinner-grow-sm" role="status"
+                                                 v-if="isLoading">
                                                 <span class="sr-only">Loading...</span>
                                             </div>
-                                            <v-select  v-model="borrower.barangay" :options="selectOptions.barangays"
-                                                       id="barangay" label="brgyDesc" v-else>
+                                            <v-select
+                                                :options="selectOptions.barangays"
+                                                :reduce="brgyDesc => brgyDesc.id"
+                                                id="barangay"
+                                                label="brgyDesc"
+                                                v-else
+                                                v-model="borrower.barangay"
+                                            >
                                                 <template #search="{attributes, events}">
                                                     <input
-                                                        class="vs__search"
                                                         :required="!borrower.barangay"
+                                                        class="vs__search"
                                                         v-bind="attributes"
                                                         v-on="events"
                                                     />
@@ -228,18 +264,25 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="province" class="col-sm-2 col-form-label">Province</label>
+                                        <label class="col-sm-2 col-form-label" for="province">Province</label>
                                         <div class="col-sm-10">
-                                            <div class="spinner-grow spinner-grow-sm" v-if="loading.provinces"
-                                                 role="status">
+                                            <div class="spinner-grow spinner-grow-sm" role="status"
+                                                 v-if="isLoading">
                                                 <span class="sr-only">Loading...</span>
                                             </div>
-                                            <v-select v-model="borrower.province" :options="selectOptions.provinces"
-                                                      id="province" label="provDesc" v-else>
+                                            <v-select
+                                                :options="selectOptions.provinces"
+                                                :reduce="provDesc => provDesc.id"
+                                                id="province"
+                                                label="provDesc"
+                                                v-else
+
+                                                v-model="borrower.province"
+                                            >
                                                 <template #search="{attributes, events}">
                                                     <input
-                                                        class="vs__search"
                                                         :required="!borrower.province"
+                                                        class="vs__search"
                                                         v-bind="attributes"
                                                         v-on="events"
                                                     />
@@ -256,18 +299,18 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="dependents" role="tabpanel" aria-labelledby="dependents-tab">
+            <div aria-labelledby="dependents-tab" class="tab-pane fade" id="dependents" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
-                        <mdb-btn color="primary" size="sm" @click.native="modal = true;modalId = 'dependent'">
-                            <mdb-icon icon="plus" class="mr-2"/>
+                        <mdb-btn @click.native="modal = true;modalId = 'dependent'" color="primary" size="sm">
+                            <mdb-icon class="mr-2" icon="plus"/>
                             Dependents
                         </mdb-btn>
-                        <mdb-btn color="primary" size="sm" @click.native="modal = true;modalId = 'neighbour'">
-                            <mdb-icon icon="plus" class="mr-2"/>
+                        <mdb-btn @click.native="modal = true;modalId = 'neighbour'" color="primary" size="sm">
+                            <mdb-icon class="mr-2" icon="plus"/>
                             Neighbours
                         </mdb-btn>
-                        <mdb-tbl v-if="borrower.dependents.length !== 0" sm bordered class="mt-3">
+                        <mdb-tbl bordered class="mt-3" sm v-if="borrower.dependents.length !== 0">
                             <caption>Dependents</caption>
                             <mdb-tbl-head>
                                 <tr>
@@ -278,13 +321,13 @@
                                 </tr>
                             </mdb-tbl-head>
                             <mdb-tbl-body>
-                                <tr v-for="(dependent,i) in borrower.dependents" :key="i">
+                                <tr :key="i" v-for="(dependent,i) in borrower.dependents">
                                     <th>{{dependent.name}}</th>
                                     <td>{{dependent.relationship.name}}</td>
                                     <td>{{dependent.birthday}}</td>
                                     <td class="d-flex justify-content-center">
-                                        <button type="button" class="close text-danger" aria-label="Close"
-                                                @click="borrower.dependents.splice(i,1)">
+                                        <button @click="borrower.dependents.splice(i,1)" aria-label="Close" class="close text-danger"
+                                                type="button">
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </td>
@@ -292,7 +335,7 @@
                             </mdb-tbl-body>
                         </mdb-tbl>
 
-                        <mdb-tbl v-if="borrower.neighbours.length !== 0" sm bordered class="nt-3">
+                        <mdb-tbl bordered class="nt-3" sm v-if="borrower.neighbours.length !== 0">
                             <caption>Neighbours</caption>
                             <mdb-tbl-head>
                                 <tr>
@@ -301,11 +344,11 @@
                                 </tr>
                             </mdb-tbl-head>
                             <mdb-tbl-body>
-                                <tr v-for="(neighbour,i) in borrower.neighbours" :key="i">
+                                <tr :key="i" v-for="(neighbour,i) in borrower.neighbours">
                                     <th>{{neighbour.name}}</th>
                                     <td class="d-flex justify-content-center">
-                                        <button type="button" class="close text-danger" aria-label="Close"
-                                                @click="borrower.neighbours.splice(i,1)">
+                                        <button @click="borrower.neighbours.splice(i,1)" aria-label="Close" class="close text-danger"
+                                                type="button">
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </td>
@@ -315,49 +358,57 @@
 
                         <form action="" class="mt-5">
                             <div class="form-group row">
-                                <label for="otherSOI" class="col-sm-2 col-form-label">Other Source of Income</label>
+                                <label class="col-sm-2 col-form-label" for="otherSOI">Other Source of Income</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="otherSOI" name="otherSOI"
+                                    <input class="form-control" id="otherSOI" name="otherSOI" type="text"
                                            v-model="borrower.otherSOI">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="barangay_cap" class="col-sm-2 col-form-label">Barangay Captain</label>
+                                <label class="col-sm-2 col-form-label" for="barangay_cap">Barangay Captain</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="barangay_cap" name="barangay_cap"
-                                           v-model="borrower.brgyCapt">
+                                    <input class="form-control" id="barangay_cap" name="barangay_cap" type="text"
+                                           v-model="borrower.barangay_captain">
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="miscellaneous" role="tabpanel" aria-labelledby="miscellaneous-tab">
+            <div aria-labelledby="miscellaneous-tab" class="tab-pane fade" id="miscellaneous" role="tabpanel">
                 <div class="card">
                     <div class="card-body">
                         <form action="">
                             <div class="form-group row">
-                                <label for="ctc_num" class="col-sm-2 col-form-label">CTC Number</label>
+                                <label class="col-sm-2 col-form-label" for="ctc_num">CTC Number</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="ctc_num" name="ctc_num"
-                                           v-model="borrower.ctc_num">
+                                    <input class="form-control" id="ctc_num" name="ctc_num" type="text"
+                                           v-model="ctc.ctc_num">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="ctc_date_issued" class="col-sm-2 col-form-label">Date Issued</label>
+                                <label class="col-sm-2 col-form-label" for="ctc_date_issued">Date Issued</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-control" id="ctc_date_issued" name="ctc_date_issued"
-                                           v-model="borrower.ctc_date_issued">
+                                    <input class="form-control" id="ctc_date_issued" name="ctc_date_issued" type="date"
+                                           v-model="ctc.ctc_date_issued">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="ctc_city_issued" class="col-sm-2 col-form-label">City</label>
+                                <label class="col-sm-2 col-form-label" for="ctc_city_issued">City</label>
                                 <div class="col-sm-10">
-                                    <div class="spinner-grow spinner-grow-sm" v-if="loading.cities" role="status">
+                                    <div class="spinner-grow spinner-grow-sm" role="status" v-if="isLoading">
                                         <span class="sr-only">Loading...</span>
                                     </div>
-                                    <v-select v-model="borrower.ctc_city_issued" :options="selectOptions.cities"
-                                              id="ctc_city_issued" label="citymunDesc" v-else></v-select>
+                                    <v-select
+                                        :options="selectOptions.cities"
+                                        :reduce="citymunDesc => citymunDesc.id"
+                                        id="ctc_city_issued"
+                                        label="citymunDesc"
+                                        v-else
+                                        v-model="ctc.ctc_city_issued"
+                                    >
+
+                                    </v-select>
                                 </div>
                             </div>
                         </form>
@@ -367,7 +418,7 @@
         </div>
         <div class="form-group row mt-3">
             <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary" form="storeBorrower">Create</button>
+                <button class="btn btn-primary" form="storeBorrower" type="submit" :disabled="isProcessing">{{submitText}}</button>
             </div>
         </div>
     </section>
@@ -376,33 +427,31 @@
 <script>
 
     import {
-        mdbRow,
-        mdbCol,
+        mdbBtn,
         mdbCard,
         mdbCardBody,
-        mdbView,
-        mdbMask,
-        mdbCardTitle,
-        mdbCardText,
         mdbCardFooter,
-        mdbIcon,
-        mdbBtn,
-        mdbPagination,
-        mdbPageNav,
-        mdbPageItem,
-        mdbTbl,
-        mdbTblHead,
-        mdbTblBody
-    } from 'mdbvue'
-    import {
+        mdbCardText,
+        mdbCardTitle,
+        mdbCol,
         mdbContainer,
-        mdbTextarea,
+        mdbIcon,
+        mdbInput,
+        mdbMask,
         mdbModal,
+        mdbModalBody,
+        mdbModalFooter,
         mdbModalHeader,
         mdbModalTitle,
-        mdbModalBody,
-        mdbInput,
-        mdbModalFooter
+        mdbPageItem,
+        mdbPageNav,
+        mdbPagination,
+        mdbRow,
+        mdbTbl,
+        mdbTblBody,
+        mdbTblHead,
+        mdbTextarea,
+        mdbView
     } from 'mdbvue'
 
     export default {
@@ -443,7 +492,7 @@
                     birthday: null,
                     gender: null,
                     referrer_id: null,
-                    brgyCapt: null,
+                    barangay_captain: null,
                     dependents: [],
                     neighbours: [],
                     street: null,
@@ -451,19 +500,20 @@
                     barangay: null,
                     province: null,
                     otherSOI: null,
+                    contact_num: null,
+                    civil_status: null
+                },
+                spouse: {
+                    name: null,
+                    date_married: null,
+                    POM: null,
+                    COD: null,
+                    date_died: null
+                },
+                ctc: {
                     ctc_num: null,
                     ctc_date_issued: null,
                     ctc_city_issued: null,
-                    contact_num: null,
-                    civil_status: null,
-                    spouse: {
-                        name: null,
-                        dateMarried:null,
-                        POM:null,
-                        COD:null,
-                        dateDied:null
-                    }
-
                 },
                 modal: false,
                 modalId: '',
@@ -471,7 +521,6 @@
                     {label: 'Male', id: 'M'},
                     {label: 'Female', id: 'F'}
                 ],
-                cityOptions: [],
                 selectOptions: {
                     cities: [],
                     barangays: [],
@@ -480,35 +529,77 @@
                     dependentRelations: [],
                     civilStatuses: []
                 },
-                loading: {
-                    cities: true,
-                    barangays: true,
-                    provinces: true,
-                    referrers: true,
-                    civilStatuses: true
-                }
+                isLoading: true,
+                isProcessing: true,
             }
         },
+        computed: {
+          submitText(){
+              return this.isProcessing ? 'Loading...' : 'Submit'
+          }
+        },
         created() {
-            this.getCities();
-            this.getBarangays();
-            this.getProvinces();
-            this.getReferrers();
-            this.getDependentRelations();
-            this.getCivilStatuses();
+            this.getSelectOptions();
         },
         methods: {
+            getApi(endpoint) {
+                return axios.get(endpoint);
+            },
+            getSelectOptions() {
+                let CreateBorrowerComponent = this;
+                axios.all([
+                    this.getApi('/api/philippines/cities'),
+                    this.getApi('/api/philippines/provinces'),
+                    this.getApi('/api/philippines/barangays'),
+                    this.getApi('/api/referrers'),
+                    this.getApi('/api/dependent/relations'),
+                    this.getApi('/api/civil-status'),
+                ])
+                    .then(axios.spread(function (cities, provinces, barangays, referrers, relations, civilStatus) {
+                        // Both requests are now complete
+                        CreateBorrowerComponent.selectOptions.cities = cities.data.data;
+                        CreateBorrowerComponent.selectOptions.provinces = provinces.data.data;
+                        CreateBorrowerComponent.selectOptions.barangays = barangays.data.data;
+                        CreateBorrowerComponent.selectOptions.referrers = referrers.data;
+                        CreateBorrowerComponent.selectOptions.dependentRelations = relations.data;
+                        CreateBorrowerComponent.selectOptions.civilStatuses = civilStatus.data;
+
+                    }))
+                    .finally(() => {
+                        this.isLoading = false;
+                        this.isProcessing = false;
+                    });
+            },
             storeBorrower(e) {
+                this.isProcessing = true;
 
-                const data = this
+                const data = {...this.borrower};
 
-                axios.post('/borrower', this.borrower)
+                if (data.civil_status !== 1) {
+                    data['spouse'] = this.spouse;
+                }
+
+                if (this.ctc.ctc_num) {
+                    data['ctc'] = this.ctc;
+                }
+
+                axios.post('/borrower', data)
                     .then(response => {
                         this.$router.push(`/borrower/${response.data.borrower_id}`)
                     })
                     .catch(e => {
-                        console.log(e);
+                        let error_message;
+                        error_message = '';
+
+                        error_message += e.response.data.message;
+
+                        for (let error in e.response.data.errors) {
+                            error_message += e.response.data.errors[error];
+                        }
+
+                        alert(error_message);
                     })
+                    .finally(() => this.isProcessing = false)
 
             },
             storePerson(e) {
@@ -526,77 +617,8 @@
                     this.borrower.neighbours.push(neighbour);
                 }
                 this.modal = false;
-            },
-            getCities() {
-                axios.get('/api/philippines/cities')
-                    .then(response => {
-                        this.selectOptions.cities = response.data.data;
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    })
-                    .finally(() => this.loading.cities = false)
-            },
-            getProvinces() {
-                axios.get('/api/philippines/provinces')
-                    .then(response => {
-                        this.selectOptions.provinces = response.data.data;
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    })
-                    .finally(() => this.loading.provinces = false)
-            },
-            getBarangays() {
-                axios.get('/api/philippines/barangays')
-                    .then(response => {
-                        this.selectOptions.barangays = response.data.data;
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    })
-                    .finally(() => this.loading.barangays = false)
-            },
-            getReferrers() {
-                axios.get('/api/referrers')
-                    .then(response => {
-                        this.selectOptions.referrers = response.data;
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    })
-                    .finally(() => this.loading.referrers = false)
-            },
-            getDependentRelations() {
-                axios.get('/api/dependent/relations')
-                    .then(response => {
-                        this.selectOptions.dependentRelations = response.data;
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    })
-                    .finally(() => this.loading.dependentRelations = false)
-            },
-            getCivilStatuses() {
-                axios.get('/api/civil-status')
-                    .then(response => {
-                        this.selectOptions.civilStatuses = response.data;
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    })
-                    .finally(() => this.loading.civilStatuses = false)
             }
         }
     }
 </script>
 
-<style scoped>
-    .card.card-cascade .view {
-        box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15), 0 3px 12px 0 rgba(0, 0, 0, 0.15);
-    }
-
-    caption {
-        text-transform: capitalize;
-    }
-</style>

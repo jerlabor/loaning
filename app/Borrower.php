@@ -22,7 +22,10 @@ class Borrower extends Model
         'ctc_num',
         'ctc_date_issued',
         'ctc_city_issued',
-        'contact_num'
+        'contact_num',
+        'referrer_id',
+        'gender',
+        'civil_status'
     ];
 
     protected $appends = ['age','full_name'];
@@ -46,8 +49,20 @@ class Borrower extends Model
         return $this->hasMany(\App\Neighbor::class);
     }
 
+    public function ctc(){
+        return $this->hasOne(\App\CTC::class);
+    }
+
     public function spouse(){
         return $this->hasOne(\App\Spouse::class);
+    }
+
+    public function pensions(){
+        return $this->hasMany(\App\Pension::class);
+    }
+
+    public function vPensions(){
+        return $this->hasMany(\App\VPension::class);
     }
 }
 

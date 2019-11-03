@@ -29,7 +29,7 @@
                             <hr>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="loan_type">Loan Type</label>
-                                <div class="col-md-9 col-lg-4">
+                                <div class="col-lg-9">
                                     <select class="custom-select" id="loan_type" required v-model="loan.loan_type">
                                         <option selected>Open this select menu</option>
                                         <option value="1">New</option>
@@ -43,21 +43,21 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="principal_amount">Principal Amount</label>
-                                <div class="col-md-9 col-lg-4">
+                                <div class="col-lg-9">
                                     <input class="form-control" id="principal_amount" required
                                            type="number" v-model="loan.principal_amount" :max="maximum_principal_amount">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="release_date">Loan Release Date</label>
-                                <div class="col-md-9 col-lg-4">
+                                <div class="col-lg-9">
                                     <input class="form-control" id="release_date" required
                                            type="date" v-model="loan.release_date">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="term">Term</label>
-                                <div class="col-md-9 col-lg-4">
+                                <div class="col-lg-9">
                                     <select class="custom-select" id="term" required v-model="loan.term">
                                         <option v-for="n in 12">{{n}}</option>
                                     </select>

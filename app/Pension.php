@@ -8,7 +8,7 @@ class Pension extends Model
 {
     protected $fillable = [
         'pension_type',
-        'bank',
+        'pension_bank',
         'bank_branch',
         'bank_type',
         'pension_agency',

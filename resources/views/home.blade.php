@@ -15,13 +15,13 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 {{--    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
-
+    <link rel="icon" href="/images/madayaw.png">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id="app">
-    <App></App>
+    <App :auth-user="{{auth()->user()}}"></App>
 </div>
 </body>
 </html>

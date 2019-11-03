@@ -17,7 +17,7 @@
                         </div>
                     </template>
                     <template v-slot:cell(view)="data">
-                        <router-link :to="{ name: 'showBorrower', params: { borrower: data.item.id }}" class="bg-success px-2 py-1 text-white rounded font-weight-bold">Loans</router-link>
+                        <router-link :to="{ name: 'showBorrower', params: { borrower: data.item.id }}" class="bg-success px-1 text-white rounded font-weight-normal">Loans</router-link>
                     </template>
                     <template v-slot:cell(action)="data">
                         <router-link :to="{ name: 'loanShow', params: { id: data.item.id }}" class="bg-light p-1 rounded"><i class="fas fa-edit"></i></router-link>

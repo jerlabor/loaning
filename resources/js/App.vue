@@ -1,7 +1,7 @@
 <template>
     <div class="flexible-content">
         <!--Navbar-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#007E33">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -21,25 +21,8 @@
         </nav>
         <!--/.Navbar-->
         <!-- Sidebar -->
-        <div class="sidenav sidebar-fixed position-fixed">
-            <a class="logo-wrapper"><img alt="" class="img-fluid" src="./assets/logo-mdb-vue-small.png"/></a>
-<!--            <mdb-list-group class="list-group-flush">-->
-<!--                <router-link to="/dashboard" @click.native="activeItem = 1">-->
-<!--                    <mdb-list-group-item :action="true" :class="activeItem === 1 && 'active'"><mdb-icon icon="chart-pie" class="mr-3"/>Dashboard</mdb-list-group-item>-->
-<!--                </router-link>-->
-<!--                <router-link to="/borrowers" @click.native="activeItem = 2">-->
-<!--                    <mdb-list-group-item :action="true" :class="activeItem === 2 && 'active'"><mdb-icon icon="users" class="mr-3"/>Borrowers</mdb-list-group-item>-->
-<!--                </router-link>-->
-<!--                <router-link to="/tables"  @click.native="activeItem = 3">-->
-<!--                    <mdb-list-group-item :action="true" :class="activeItem === 3 && 'active'"><mdb-icon icon="table" class="mr-3"/>Loans</mdb-list-group-item>-->
-<!--                </router-link>-->
-<!--                <router-link to="/maps" @click.native="activeItem = 4">-->
-<!--                    <mdb-list-group-item :action="true" :class="activeItem === 4 && 'active'"><mdb-icon icon="map" class="mr-3"/>Collection</mdb-list-group-item>-->
-<!--                </router-link>-->
-<!--                <router-link to="/404" @click.native="activeItem = 5">-->
-<!--                    <mdb-list-group-item :action="true" :class="activeItem === 5 && 'active'"><mdb-icon icon="exclamation" class="mr-3"/>404</mdb-list-group-item>-->
-<!--                </router-link>-->
-<!--            </mdb-list-group>-->
+        <div class="sidenav sidebar-fixed position-fixed" >
+            <router-link to="/dashboard" class="logo-wrapper"><img alt="" class="img-fluid" src="/svg/madayaw.svg"/></router-link>
             <router-link to="/dashboard">Dashboard</router-link>
             <button class="dropdown-btn">Borrowers
                 <i class="fa fa-caret-down"></i>
@@ -69,9 +52,9 @@
             <div class="mt-5 p-5 content">
                 <router-view></router-view>
             </div>
-            <ftr color="primary-color-dark" class="text-center font-small darken-2">
+            <ftr color="success-color-dark" class="text-center font-small darken-2">
                 <p class="footer-copyright mb-0 py-3 text-center">
-                    &copy; {{new Date().getFullYear()}} Copyright: <a href="https://mdbootstrap.com/docs/vue/"> MDBootstrap.com </a>
+                    &copy; {{new Date().getFullYear()}} Copyright: <a href="https://mdbootstrap.com/docs/vue/"> Madayaw Lending Investors Inc. </a>
                 </p>
             </ftr>
         </main>
@@ -109,13 +92,16 @@
             }
         }
         ,
+        props: [
+            'authUser'
+        ],
         data () {
             return {
                 activeItem: 1
             }
         },
-        beforeMount () {
-            this.activeItem = this.$route.matched[0].props.default.page
+        created(){
+            this.$store.commit('setAuthUser',this.authUser);
         },
         mounted(){
             let dropdown = document.getElementsByClassName("dropdown-btn");
@@ -171,7 +157,7 @@
 
     .sidebar-fixed .logo-wrapper img{
         width: 100%;
-        padding: 2.5rem;
+        padding-bottom: 2.5rem;
     }
 
     .sidebar-fixed .list-group-item {

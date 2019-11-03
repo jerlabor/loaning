@@ -51,8 +51,12 @@ class DatatablesController extends Controller
     }
 
     public function loans(){
-
-        $loans = Loan::with(['pension.borrower','repaymentSummary'])->latest()->paginate(10);
+        $pension_id = request()->query('pension_id');
+        $loans = Loan::with(['pension.borrower','repaymentSummary'])
+            ->when($pension_id,function($query,$pension_id){
+                return $query->wherePensionCode($pension_id);
+            })
+            ->latest()->paginate(10);
         return new DatatableCollection($loans);
     }
 }

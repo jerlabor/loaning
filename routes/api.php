@@ -38,6 +38,7 @@ Route::get('/civil-status',function (){
 
 /*Borrower*/
 Route::get('/borrowers/{borrower}/pensions','BorrowerController@pensions');
+Route::get('/borrower/{borrower}','BorrowerController@show');
 
 
 /*Pension*/
@@ -50,3 +51,15 @@ Route::get('/borrowers','DatatablesController@borrowers');
 
 /*Loans*/
 Route::get('/loan/{loan}','LoanController@show');
+
+//Pension Type
+Route::get('/pension/types','PensionTypeController@index');
+
+//Banks
+Route::get('/banks','BankController@index');
+
+//Pension Agency
+Route::get('/agency/pension','PensionAgencyController@index');
+
+//Bank Type
+Route::get('/bank/types','BankTypeController@index');

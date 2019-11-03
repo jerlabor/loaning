@@ -29,14 +29,10 @@ class CreateBorrowersTable extends Migration
             $table->unsignedTinyInteger('civil_status')->nullable();
             $table->string('other_SOI')->nullable();
             $table->string('barangay_captain')->nullable();
-            $table->string('ctc_num')->nullable();
-            $table->date('ctc_date_issued')->nullable();
-            $table->unsignedBigInteger('ctc_city_issued')->nullable();
             $table->timestamps();
             $table->foreign('city')->references('id')->on('cities')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('barangay')->references('id')->on('barangays')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('province')->references('id')->on('provinces')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('ctc_city_issued')->references('id')->on('cities')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('civil_status')->references('id')->on('civil_statuses')->onDelete('cascade')->onUpdate('cascade');
         });
     }

@@ -17,7 +17,8 @@ class BorrowerResource extends JsonResource
         return [
             'age' => $this->age,
             'birthday' => $this->birthday->format('F d, Y'),
-            'full_name' => $this->full_name
+            'full_name' => $this->full_name,
+            'pensions' => $this->whenLoaded('vPensions'),
         ];
     }
 }

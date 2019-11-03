@@ -15,7 +15,8 @@ class LoanController extends Controller
      */
     public function index()
     {
-        //
+
+        return response()->json(Loan::all(),Response::HTTP_OK);
     }
 
     /**
@@ -43,6 +44,7 @@ class LoanController extends Controller
         $loan->release_date = $request->release_date;
         $loan->term = $request->term;
         $loan->added_by = $request->user()->id;
+        $loan->loan_status = 1;
 
         if($loan->save()){
             return response()->json($loan,Response::HTTP_CREATED );
