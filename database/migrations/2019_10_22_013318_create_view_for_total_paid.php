@@ -15,7 +15,7 @@ class CreateViewForTotalPaid extends Migration
     public function up()
     {
         DB::statement(
-            "CREATE VIEW v_repayment_summary AS
+            "CREATE OR REPLACE VIEW v_repayment_summary AS
                 SELECT 
                     loan_id,
                     SUM(amount) AS total_paid,

@@ -150,7 +150,7 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary mt-3" form="loanCreate" type="submit">Submit</button>
+        <button class="btn btn-primary mt-3" form="loanCreate" type="submit" :disabled="isProcessing">Submit</button>
     </div>
 </template>
 
@@ -204,13 +204,17 @@
                     })
             }
             ,loanCreate(){
+                this.isProcessing = true;
                 axios.post('/loan',this.loan)
                     .then(response => {
-                        this.$router.push(response.data.data.links.view)
+                        this.$router.push(response.data.links.view)
                     })
                     .catch(e => {
-
-                    })
+                        alert(e);
+                    }).
+                    finally(() => {
+                        this.isProcessing = false;
+                     })
             }
         }
         , components: {}
@@ -226,6 +230,7 @@
                     term: null,
                     release_date: null
                 },
+                isProcessing: false,
                 interest: 2.5,
                 maximum_principal_amount: 15000,
                 miscellaneous_fee: 300

@@ -45,11 +45,10 @@ class LoanController extends Controller
         $loan->term = $request->term;
         $loan->added_by = $request->user()->id;
         $loan->loan_status = 1;
-
         if($loan->save()){
             return response()->json($loan,Response::HTTP_CREATED );
         }else{
-            return response()->json('',Response::HTTP_CONFLICT );
+            return response()->json('Error',Response::HTTP_CONFLICT );
         }
     }
 

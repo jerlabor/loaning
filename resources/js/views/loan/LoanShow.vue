@@ -82,12 +82,16 @@
                         <th scope="col">Amount</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr v-if="!isLoading" v-for="repayment in loan.repayments">
+                    <tbody v-if="!isLoading">
+                    <tr v-if="loans.repayments.length > 0" v-for="repayment in loan.repayments">
                         <td>{{repayment.created_at}}</td>
                         <td>{{repayment.collector.name}}</td>
                         <td>{{repayment.amount}}</td>
                     </tr>
+                    <tr v-else>
+                        No repayments
+                    </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -122,17 +126,20 @@
                     .catch(e => {
 
                     })
+            },
+            getLoan(){
+                axios.get(`/api/loan/${this.$route.params.id}`)
+                    .then(response => {
+                        this.loan = response.data;
+                        this.isLoading = false;
+                    })
+                    .catch(e => {
+
+                    });
             }
         },
         created() {
-            axios.get(`/api/loan/${this.$route.params.id}`)
-                .then(response => {
-                    this.loan = response.data;
-                    this.isLoading = false;
-                })
-                .catch(e => {
-
-                });
+            this.getLoan();
         }
     }
 </script>

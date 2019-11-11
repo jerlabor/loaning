@@ -19,13 +19,21 @@ class Loan extends Model
         'release_date' => 'date:Y-m-d'
     ];
 
+    protected $appends = ['links'];
+
+    public function getLinksAttribute()
+    {
+        return ['view' => "/loan/{$this->attributes['id']}"];
+    }
+
     public function getDueAttribute()
     {
         return $this->attributes['principal_amount'] * $this->attributes['term'];
     }
 
-    public function getMaturityDateAttribute()
+     public function getMaturityDateAttribute()
     {
+
         return $this->release_date->addMonths($this->attributes['term'])->toFormattedDateString();
     }
 
