@@ -87,7 +87,8 @@
             logout(){
                 axios.post('/logout')
                     .then(() => {
-                        window.reload();
+                        console.log('tae');
+                        window.location.reload();
                     })
             }
         }

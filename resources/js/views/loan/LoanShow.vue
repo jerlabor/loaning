@@ -83,15 +83,16 @@
                     </tr>
                     </thead>
                     <tbody v-if="!isLoading">
-                    <tr v-if="loans.repayments.length > 0" v-for="repayment in loan.repayments">
+                    <tr v-if="loan.repayments.length > 0" v-for="repayment in loan.repayments">
                         <td>{{repayment.created_at}}</td>
                         <td>{{repayment.collector.name}}</td>
                         <td>{{repayment.amount}}</td>
                     </tr>
                     <tr v-else>
-                        No repayments
+                        <td>No Repayments</td>
+                        <td>No Repayments</td>
+                        <td>No Repayments</td>
                     </tr>
-
                     </tbody>
                 </table>
             </div>
@@ -121,10 +122,11 @@
             addPayment(){
                 axios.post('/repayment',this.repayment)
                     .then(response => {
-
+                        this.showRepaymentModal = false;
+                        this.getLoan();
                     })
                     .catch(e => {
-
+                        alert(e);
                     })
             },
             getLoan(){
@@ -134,7 +136,7 @@
                         this.isLoading = false;
                     })
                     .catch(e => {
-
+                        alert(e);
                     });
             }
         },
