@@ -9,7 +9,11 @@
                 </mdb-input>
                 <b-table :fields="fields" :filter="filter" :filter-included-fields="['full_name']" :items="borrowerProvider" :current-page="currentPage"
                          :per-page="perPage" hover
-                         small :busy.sync="isBusy" ref="loansTable">
+                         small :busy.sync="isBusy"
+                         ref="loansTable"
+                         show-empty
+                         empty-html="No data found . <a href='/borrower/create' class='text-primary'>Click here to Add Borrower</a>"
+                >
                     <template v-slot:table-busy>
                         <div class="text-center text-success my-2">
                             <b-spinner class="align-middle"></b-spinner>

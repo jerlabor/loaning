@@ -52,9 +52,15 @@ class DatatablesController extends Controller
 
     public function loans(){
         $pension_id = request()->query('pension_id');
+        $borrower = request()->query('borrower');
         $loans = Loan::with(['pension.borrower','repaymentSummary'])
             ->when($pension_id,function($query,$pension_id){
                 return $query->wherePensionCode($pension_id);
+            })
+            ->when($borrower,function($query,$borrower){
+                return $query->whereHas('pension',function($query) use($borrower){
+                    $query->whereBorrowerId($borrower);
+                });
             })
             ->latest()->paginate(10);
         return new DatatableCollection($loans);

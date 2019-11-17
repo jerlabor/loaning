@@ -30,8 +30,8 @@
                     </div>
                 </div>
                 <div>
-                    <button class="btn btn-success btn-sm">Add Loan</button>
-                    <button class="btn btn-success btn-sm">View All Loans</button>
+                    <router-link :to="{name:'loanCreate'}" class="btn btn-success btn-sm">Add Loan</router-link>
+                    <router-link :to="{name:'loansByBorrower',params:{borrower:loan.pension.borrower.id}}" class="btn btn-success btn-sm">View All Loans</router-link>
                 </div>
             </div>
         </div>

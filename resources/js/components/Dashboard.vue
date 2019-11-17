@@ -1,9 +1,27 @@
 <template>
-  <section id="dashboard"></section>
+  <section id="dashboard">
+      <mdb-col xl="3" md="6" class="mb-r">
+          <mdb-card cascade class="cascading-admin-card">
+              <div class="admin-up">
+                  <mdb-icon icon="users" class="success-color"/>
+                  <div class="data">
+                      <p>BORROWERS</p>
+                      <h4>
+                          <strong ref="numOfBorrowers">
+                              <div class="spinner-border text-success" role="status">
+                                  <span class="sr-only">Loading...</span>
+                              </div>
+                          </strong>
+                      </h4>
+                  </div>
+              </div>
+          </mdb-card>
+      </mdb-col>
+  </section>
 </template>
 
 <script>
-import { mdbRow, mdbCol, mdbBtn, mdbCard, mdbCardBody, mdbCardHeader, mdbCardText, mdbIcon, mdbTbl, mdbBarChart, mdbPieChart, mdbLineChart, mdbRadarChart, mdbDoughnutChart, mdbListGroup, mdbListGroupItem, mdbBadge, mdbModal, mdbModalHeader, mdbModalTitle, mdbModalBody, mdbModalFooter } from 'mdbvue'
+import { mdbRow, mdbCol, mdbBtn, mdbCard, mdbCardBody, mdbCardHeader, mdbCardText, mdbIcon, mdbTbl, mdbListGroup, mdbListGroupItem, mdbBadge, mdbModal, mdbModalHeader, mdbModalTitle, mdbModalBody, mdbModalFooter } from 'mdbvue'
 
 export default {
   name: 'Dashboard',
@@ -17,11 +35,6 @@ export default {
     mdbCardText,
     mdbIcon,
     mdbTbl,
-    mdbBarChart,
-    mdbPieChart,
-    mdbLineChart,
-    mdbRadarChart,
-    mdbDoughnutChart,
     mdbListGroup,
     mdbListGroupItem,
     mdbBadge,
@@ -31,6 +44,20 @@ export default {
     mdbModalBody,
     mdbModalFooter
   },
+    created(){
+        this.getNumOfBorrowers();
+    },
+    methods:{
+      getNumOfBorrowers(){
+          axios.get('/api/borrowers/count')
+              .then(res => {
+                  this.$refs.numOfBorrowers.innerText = res.data;
+              })
+              .catch(e => {
+
+              })
+        }
+    },
   data () {
     return {
       showFrameModalTop: false,

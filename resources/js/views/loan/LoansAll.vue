@@ -8,7 +8,7 @@
                     <mdb-btn color="default" group id="button-addon2" size="md" slot="append">Clear</mdb-btn>
                 </mdb-input>
                 <b-table :fields="fields" :filter="filter" :filter-included-fields="['id']" :items="items" :no-provider-paging="true" hover
-                         small :busy.sync="isBusy">
+                         small :busy.sync="isBusy" show-empty empty-html="No loans found . <a href='/loan/create' class='text-primary'>Click here to Add Loan</a>">
                     <template v-slot:table-busy>
                         <div class="text-center text-danger my-2">
                             <b-spinner class="align-middle"></b-spinner>

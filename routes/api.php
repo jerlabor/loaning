@@ -63,3 +63,9 @@ Route::get('/agency/pension','PensionAgencyController@index');
 
 //Bank Type
 Route::get('/bank/types','BankTypeController@index');
+
+
+//COUNT
+Route::get('/borrowers/count',function (){
+   return \App\Borrower::all()->count();
+});

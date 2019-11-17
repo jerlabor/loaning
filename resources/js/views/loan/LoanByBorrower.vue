@@ -1,48 +1,52 @@
 <template>
     <div>
-        <button class="btn btn-danger btn-sm" @click="$router.go(-1)">Back</button>
-        <router-link :to="{name: 'loanCreate',query: {pension: $route.params.pension}}" class="btn btn-primary btn-sm">Add Loan</router-link>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Loans By Specific Pension</h5>
-                <div class="table-responsive">
-                    <b-table :fields="fields" :filter="filter" :filter-included-fields="['id']" :items="items" :no-provider-paging="true" hover
-                             small :busy.sync="isBusy" show-empty empty-text="No loans found under this pension.">
-                        <template v-slot:table-busy>
-                            <div class="text-center text-danger my-2">
-                                <b-spinner class="align-middle"></b-spinner>
-                                <strong>Loading...</strong>
-                            </div>
-                        </template>
-                        <template v-slot:cell(balance)="data">
-                            {{ (data.item.principal_amount * data.item.term) - data.item.repayment_summary.total_paid}}
-                        </template>
-                        <template v-slot:cell(due)="data">
-                            {{ data.item.principal_amount * data.item.term }}
-                        </template>
-                        <template v-slot:cell(view)="data">
-                            <router-link :to="{ name: 'loanShow', params: { id: data.item.id }}"><i class="far fa-eye"></i></router-link>
-                        </template>
-                    </b-table>
-                    <b-pagination :per-page="perPage"
-                                  :total-rows="rows"
-                                  aria-controls="my-table"
-                                  v-if="!isLoading"
-                                  v-model="currentPage"
-                    >
-                    </b-pagination>
-                </div>
+                <h5 class="card-title">View All Loans</h5>
+                <mdb-input ariaDescribedBy="button-addon2" class="mt-0 mb-3 col-4 float-right"
+                           placeholder="Search Loan#" v-model="filter">
+                    <mdb-btn color="default" group id="button-addon2" size="md" slot="append">Clear</mdb-btn>
+                </mdb-input>
+                <b-table :fields="fields" :filter="filter" :filter-included-fields="['id']" :items="items" :no-provider-paging="true" hover
+                         small :busy.sync="isBusy" show-empty empty-html="No loans found . <a href='/loan/create' class='text-primary'>Click here to Add Loan</a>">
+                    <template v-slot:table-busy>
+                        <div class="text-center text-danger my-2">
+                            <b-spinner class="align-middle"></b-spinner>
+                            <strong>Loading...</strong>
+                        </div>
+                    </template>
+                    <template v-slot:cell(balance)="data">
+                        {{ (data.item.principal_amount * data.item.term) - data.item.repayment_summary.total_paid}}
+                    </template>
+                    <template v-slot:cell(due)="data">
+                        {{ data.item.principal_amount * data.item.term }}
+                    </template>
+                    <template v-slot:cell(view)="data">
+                        <router-link :to="{ name: 'loanShow', params: { id: data.item.id }}"><i class="far fa-eye"></i></router-link>
+                    </template>
+                </b-table>
+                <b-pagination :per-page="perPage"
+                              :total-rows="rows"
+                              aria-controls="my-table"
+                              v-if="!isLoading"
+                              v-model="currentPage"
+                >
+                </b-pagination>
+
             </div>
         </div>
+
     </div>
 </template>
 
 <script>
+    import {mdbBtn, mdbInput} from 'mdbvue';
+
     export default {
-        name: "LoansByPension",
+        name: "LoanByUser",
         methods: {
             loansProvider(currentPage = 1) {
-                const promise = axios.get(`/api/loans?pension_id=${this.$route.params.pension}&page=${currentPage}`);
+                const promise = axios.get(`/api/loans?borrower=${this.$route.params.borrower}&page=${currentPage}`);
 
                 return promise.then(response => {
                     const items = response.data.data;
@@ -64,6 +68,10 @@
         },
         created() {
             this.loansProvider();
+        },
+        components: {
+            mdbBtn,
+            mdbInput
         },
         data() {
             return {

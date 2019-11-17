@@ -9,6 +9,7 @@ import LoanShow from "../views/loan/LoanShow";
 import LoansByPension from "../views/loan/LoansByPension";
 import ShowAllBorrowers from "../views/borrower/ShowAllBorrowers"
 import LoansAll from "../views/loan/LoansAll";
+import LoanByBorrower from "../views/loan/LoanByBorrower";
 
 Vue.use(Router)
 export const router =  new Router({
@@ -50,6 +51,15 @@ export const router =  new Router({
             },
             props: { page: 10 },
             component: ShowBorrower
+        },
+        {
+            path: '/borrower/:borrower/loans',
+            name: 'loansByBorrower',
+            meta: {
+                requiresAuth: true
+            },
+            props: { page: 232 },
+            component: LoanByBorrower
         }
         ,
         {

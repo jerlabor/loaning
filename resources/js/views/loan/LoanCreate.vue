@@ -12,8 +12,11 @@
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="pension_code">Pension Code</label>
                                 <div class="col-md-9">
-                                    <v-select :options="api.pensions" input-id="pension_code" label="id"
-                                              v-model="loan.pension_code">
+                                    <v-select :options="api.pensions"
+                                              input-id="pension_code"
+                                              label="id"
+                                              v-model="loan.pension_code"
+                                              >
                                         <template #search="{attributes, events}">
                                             <input
                                                 :required="!loan.pension_code"
@@ -182,6 +185,7 @@
                 birthdayEl = document.getElementById('birthday');
 
                 if (val) {
+                    console.log(val);
                     let borrower = val.borrower;
                     borrowerEl.value = borrower.full_name;
                     current_pensionEl.value = val.pension;
@@ -194,13 +198,25 @@
             }
         }
         , methods: {
+            checkURLForPension(){
+                let pension_id = this.$route.query.pension;
+                if(pension_id){
+                    let pension = this.api.pensions.find(pension => {
+                        return pension.id == pension_id;
+                    });
+                    this.loan.pension_code = pension;
+                }
+            },
             getPensions() {
                 axios.get('/api/pension')
                     .then(response => {
                         this.api.pensions = response.data.data;
                     })
                     .catch(e => {
-                        console.log(e);
+                        alert(e);
+                    })
+                    .finally(() => {
+                        this.checkURLForPension();
                     })
             }
             ,loanCreate(){
