@@ -15,7 +15,14 @@ class CreatePensionsTable extends Migration
     {
         Schema::create('pensions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('borrower_id');
+            $table->string('first_name');
+            $table->string('middle_name');
+            $table->string('last_name');
+            $table->date('pensioner_dob');
+            $table->date('date_pension_started')->nullable();
+            $table->string('yos');
+            $table->string('employer');
+            $table->string('savings_acct_num');
             $table->unsignedBigInteger('added_by');
             $table->unsignedTinyInteger('pension_type');
             $table->unsignedBigInteger('pension_bank');
@@ -25,7 +32,6 @@ class CreatePensionsTable extends Migration
             $table->char('payday',2);
             $table->integer('pension');
             $table->timestamps();
-            $table->foreign('borrower_id')->references('id')->on('borrowers')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('added_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('pension_type')->references('id')->on('pension_types')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('pension_bank')->references('id')->on('banks')->onUpdate('cascade')->onDelete('cascade');

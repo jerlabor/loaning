@@ -38,6 +38,7 @@ class LoanController extends Controller
     public function store(Request $request)
     {
         $loan = new Loan;
+        $loan->borrower_id = $request->borrower_id['id'];
         $loan->pension_code = $request->pension_code['id'];
         $loan->loan_type = $request->loan_type;
         $loan->principal_amount = $request->principal_amount;
@@ -60,8 +61,8 @@ class LoanController extends Controller
      */
     public function show(Loan $loan)
     {
-        return response()->json($loan->load(['pension:id,borrower_id',
-            'pension.borrower:id,first_name,middle_name,last_name,birthday,created_at',
+        return response()->json($loan->load(['pension',
+            'borrower:id,first_name,middle_name,last_name,birthday,created_at',
             'repayments.collector:id,name','repaymentSummary:loan_id,total_paid'])->setAppends(['due','balance','maturity_date']),Response::HTTP_OK);
     }
 

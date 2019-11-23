@@ -8,13 +8,30 @@
                 <div class="row">
                     <div class="col-6">
                         <form class="loanCreate" id="loanCreate" @submit.prevent="loanCreate">
-
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="borrower">Borrower</label>
+                                <div class="col-md-9">
+                                    <v-select :options="api.borrowers"
+                                              input-id="borrower"
+                                              label="full_name"
+                                              v-model="loan.borrower_id"
+                                    >
+                                        <template #search="{attributes, events}">
+                                            <input
+                                                :required="!loan.borrower_id"
+                                                class="vs__search"
+                                                v-bind="attributes"
+                                                v-on="events"
+                                            />
+                                        </template>
+                                    </v-select>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="pension_code">Pension Code</label>
                                 <div class="col-md-9">
                                     <v-select :options="api.pensions"
                                               input-id="pension_code"
-                                              label="id"
                                               v-model="loan.pension_code"
                                               >
                                         <template #search="{attributes, events}">
@@ -28,19 +45,14 @@
                                     </v-select>
                                 </div>
                             </div>
-
                             <hr>
+                            <div v-if="loan.pension_code && loan.borrower_id">
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="loan_type">Loan Type</label>
                                 <div class="col-lg-9">
                                     <select class="custom-select" id="loan_type" required v-model="loan.loan_type">
                                         <option selected>Open this select menu</option>
-                                        <option value="1">New</option>
-                                        <option value="2">Renewal</option>
-                                        <option value="2">Addition</option>
-                                        <option value="3">Reactive</option>
-                                        <option value="3">Advance Bonus</option>
-                                        <option value="3">Salary</option>
+                                        <option v-for="(type,id) in options.loanTypes" :value="id+1">{{type}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -66,17 +78,10 @@
                                     </select>
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                     </form>
                     </div>
                     <div class="col-6">
-
-
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label font-weight-bolder" for="borrower">Borrower</label>
-                            <div class="col-sm-10">
-                                <input class="form-control-plaintext" id="borrower" readonly type="text">
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label font-weight-bolder" for="current_pension">Current
                                 Pension</label>
@@ -85,14 +90,6 @@
                                        value="0">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label font-weight-bolder" for="birthday">Birthday</label>
-                            <div class="col-sm-10">
-                                <input class="form-control-plaintext" id="birthday" readonly type="text">
-                            </div>
-                        </div>
-
-
                     </div>
                 </div>
             </div>
@@ -153,7 +150,7 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary mt-3" form="loanCreate" type="submit" :disabled="isProcessing">Submit</button>
+        <button class="btn btn-primary mt-3" form="loanCreate" type="submit" :disabled="isProcessing || cantSubmitForm">Submit</button>
     </div>
 </template>
 
@@ -162,6 +159,7 @@
         name: "LoanCreate",
         created() {
             this.getPensions();
+            this.getBorrowers();
         }
         , computed: {
             totalLoan() {
@@ -187,17 +185,31 @@
                 if (val) {
                     console.log(val);
                     let borrower = val.borrower;
-                    borrowerEl.value = borrower.full_name;
                     current_pensionEl.value = val.pension;
-                    birthdayEl.value = `${borrower.birthday} (${borrower.age} yrs. old)`;
+                    // birthdayEl.value = `${borrower.birthday} (${borrower.age} yrs. old)`;
                 } else {
                     borrowerEl.value = '';
                     current_pensionEl.value = '';
                     birthdayEl.value = '';
                 }
+            },
+            'loan.borrower_id'(borrower){
+
+                // check if borrower has existing loan
+                if(parseInt(borrower.loans_count) > 0){
+                    this.options.loanTypes.includes('New') ? this.options.loanTypes.shift() : ''
+                }else{
+                    !this.options.loanTypes.includes('New') ? this.options.loanTypes.unshift('New') : ''
+                }
+
+                // check if loans status of has ongoing
+                 this.cantSubmitForm = borrower.active_loan;
             }
         }
         , methods: {
+            checkBorrowerLoanDetails(){
+
+            },
             checkURLForPension(){
                 let pension_id = this.$route.query.pension;
                 if(pension_id){
@@ -205,6 +217,14 @@
                         return pension.id == pension_id;
                     });
                     this.loan.pension_code = pension;
+                }
+            },checkURLForBorrower(){
+                let barrower_id = this.$route.query.borrower;
+                if(barrower_id){
+                    let borrower = this.api.borrower.find(borrower => {
+                        return borrower.id == barrower_id;
+                    });
+                    this.loan.borrower_id = borrower;
                 }
             },
             getPensions() {
@@ -217,6 +237,18 @@
                     })
                     .finally(() => {
                         this.checkURLForPension();
+                    })
+            }
+            ,getBorrowers(){
+                axios.get('/api/borrowers')
+                    .then(response => {
+                        this.api.borrowers = response.data.data;
+                    })
+                    .catch(e => {
+                        alert(e);
+                    })
+                    .finally(() => {
+                        this.checkURLForBorrower();
                     })
             }
             ,loanCreate(){
@@ -233,13 +265,22 @@
                      })
             }
         }
-        , components: {}
         , data() {
             return {
                 api: {
-                    pensions: []
+                    pensions: [],
+                    borrowers: []
+                },
+                options: {
+                  loanTypes: [
+                      'New',
+                      'Renewal',
+                      'Advance Bonus',
+                      'Salary',
+                  ]
                 },
                 loan: {
+                    borrower_id: null,
                     pension_code: null,
                     loan_type: null,
                     principal_amount: null,
@@ -249,7 +290,8 @@
                 isProcessing: false,
                 interest: 2.5,
                 maximum_principal_amount: 15000,
-                miscellaneous_fee: 300
+                miscellaneous_fee: 300,
+                cantSubmitForm: true
             }
         }
     }

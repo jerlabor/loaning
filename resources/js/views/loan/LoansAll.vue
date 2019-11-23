@@ -82,7 +82,7 @@
                         sortable: true,
                     },
                     {
-                        key: 'pension.borrower.full_name',
+                        key: 'borrower.full_name',
                         label: 'Name',
                         sortable: true,
                     },

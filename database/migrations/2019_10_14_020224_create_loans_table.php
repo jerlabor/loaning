@@ -15,9 +15,10 @@ class CreateLoansTable extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('borrower_id');
             $table->unsignedBigInteger('pension_code');
             $table->unsignedTinyInteger('loan_type');
-            $table->unsignedTinyInteger('loan_status');
+            $table->unsignedTinyInteger('loan_status')->default(1);
             $table->unsignedBigInteger('added_by');
             $table->decimal('principal_amount',13,2);
             $table->char('term',2);

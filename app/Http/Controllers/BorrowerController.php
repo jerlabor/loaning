@@ -10,6 +10,7 @@ use App\Pension;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class BorrowerController extends Controller
@@ -21,7 +22,7 @@ class BorrowerController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Borrower::withCount(['loans'])->get(),Response::HTTP_OK);
     }
 
     /**
@@ -47,6 +48,19 @@ class BorrowerController extends Controller
         $borrower = DB::transaction(function () use($request){
 
             $borrower = Borrower::create($request->validated());
+
+
+            /*store referrers*/
+            if($request->has('referrals')){
+
+                $referrerToBeInsertedArr = [];
+
+                foreach ($request->referrals as $referral){
+                    array_push($referrerToBeInsertedArr,new \App\Referral(['referral_name' => $referral['referral_name']]));
+                }
+
+                $borrower->referrals()->saveMany($referrerToBeInsertedArr);
+            }
 
             //Store If Has Dependents
             if(count($request->dependents) !== 0){
@@ -109,7 +123,7 @@ class BorrowerController extends Controller
      */
     public function show(Borrower $borrower)
     {
-        return new BorrowerResource($borrower->load('vPensions'));
+        return response()->json($borrower->loadCount('loans'),Response::HTTP_OK);
     }
 
     /**

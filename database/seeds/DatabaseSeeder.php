@@ -95,6 +95,6 @@ class DatabaseSeeder extends Seeder
         INSERT INTO `barangays` VALUES ('10', '012802009', 'Corocor', '01', '0128', '012802');
         ");
 
-         $this->call(BorrowersTableSeeder::class);
+         $this->call(ReferralsTableSeeder::class);
     }
 }

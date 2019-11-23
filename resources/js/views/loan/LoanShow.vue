@@ -24,15 +24,15 @@
                     </div>
                     <div>
                         <div class="borrower-details">
-                            <div class="font-weight-bold">{{loan.pension.borrower.full_name}}</div>
-                            <div>Member Since: {{loan.pension.borrower.created_at}}</div>
+                            <div class="font-weight-bold">{{loan.borrower.full_name}}</div>
+                            <div>Member Since: {{loan.borrower.created_at}}</div>
                         </div>
                     </div>
                 </div>
-                <div>
+               <!-- <div>
                     <router-link :to="{name:'loanCreate'}" class="btn btn-success btn-sm">Add Loan</router-link>
-                    <router-link :to="{name:'loansByBorrower',params:{borrower:loan.pension.borrower.id}}" class="btn btn-success btn-sm">View All Loans</router-link>
-                </div>
+                    <router-link :to="{name:'loansByBorrower',params:{borrower:loan.borrower.id}}" class="btn btn-success btn-sm">View All Loans</router-link>
+                </div>-->
             </div>
         </div>
 

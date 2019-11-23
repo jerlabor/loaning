@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePension;
 use App\Http\Resources\PensionResource;
 use App\Pension;
+use App\VPension;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,7 +18,7 @@ class PensionController extends Controller
      */
     public function index()
     {
-        return PensionResource::collection(Pension::all());
+        return PensionResource::collection(VPension::all());
     }
 
     /**

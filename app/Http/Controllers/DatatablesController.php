@@ -38,7 +38,7 @@ class DatatablesController extends Controller
         $sortBy = request()->query('sortBy');
         $sortDesc = request()->query('sortDesc');
 
-        $borrowers = Borrower::when($q,function ($query,$q){
+        $borrowers = Borrower::withCount('loans')->when($q,function ($query,$q){
             return $query->whereRaw("CONCAT_WS(' ',first_name,middle_name,last_name) LIKE '%{$q}%'");
         })->when($sortBy,function ($query,$sortBy) use ($sortDesc){
             $sort = $sortDesc === 'true' ? 'desc' : 'asc';
@@ -53,14 +53,12 @@ class DatatablesController extends Controller
     public function loans(){
         $pension_id = request()->query('pension_id');
         $borrower = request()->query('borrower');
-        $loans = Loan::with(['pension.borrower','repaymentSummary'])
+        $loans = Loan::with(['pension','repaymentSummary','borrower'])
             ->when($pension_id,function($query,$pension_id){
                 return $query->wherePensionCode($pension_id);
             })
             ->when($borrower,function($query,$borrower){
-                return $query->whereHas('pension',function($query) use($borrower){
-                    $query->whereBorrowerId($borrower);
-                });
+                return $query->whereBorrowerId($borrower);
             })
             ->latest()->paginate(10);
         return new DatatableCollection($loans);

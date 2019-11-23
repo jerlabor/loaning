@@ -25,8 +25,11 @@
                     <mdb-input class="mb-5" icon="calendar" label="Birthday" name="birthday" required size="sm"
                                type="date"/>
                 </mdb-modal-body>
-                <mdb-modal-body class="mx-3 grey-text" v-else>
+                <mdb-modal-body class="mx-3 grey-text" v-else-if="modalId === 'neighbour'">
                     <mdb-input class="mb-5" icon="user" label="Name" name="neighbourName" required size="sm"/>
+                </mdb-modal-body>
+                <mdb-modal-body class="mx-3 grey-text" v-else-if="modalId === 'referral'">
+                    <mdb-input class="mb-5" icon="user" label="Name" name="referralName" required size="sm"/>
                 </mdb-modal-body>
             </form>
             <mdb-modal-footer center>
@@ -310,6 +313,10 @@
                             <mdb-icon class="mr-2" icon="plus"/>
                             Neighbours
                         </mdb-btn>
+                        <mdb-btn @click.native="modal = true;modalId = 'referral'" color="primary" size="sm">
+                            <mdb-icon class="mr-2" icon="plus"/>
+                            Referrals
+                        </mdb-btn>
                         <mdb-tbl bordered class="mt-3" sm v-if="borrower.dependents.length !== 0">
                             <caption>Dependents</caption>
                             <mdb-tbl-head>
@@ -356,12 +363,33 @@
                             </mdb-tbl-body>
                         </mdb-tbl>
 
+                        <mdb-tbl bordered class="nt-3" sm v-if="borrower.referrals.length !== 0">
+                            <caption>Referrals</caption>
+                            <mdb-tbl-head>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </mdb-tbl-head>
+                            <mdb-tbl-body>
+                                <tr :key="i" v-for="(referral,i) in borrower.referrals">
+                                    <th>{{referral.referral_name}}</th>
+                                    <td class="d-flex justify-content-center">
+                                        <button @click="borrower.referrals.splice(i,1)" aria-label="Close" class="close text-danger"
+                                                type="button">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </mdb-tbl-body>
+                        </mdb-tbl>
+
                         <form action="" class="mt-5">
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="otherSOI">Other Source of Income</label>
+                                <label class="col-sm-2 col-form-label" for="other_SOI">Other Source of Income</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" id="otherSOI" name="otherSOI" type="text"
-                                           v-model="borrower.otherSOI">
+                                    <input class="form-control" id="other_SOI" name="other_SOI" type="text"
+                                           v-model="borrower.other_SOI">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -492,6 +520,7 @@
                     birthday: null,
                     gender: null,
                     referrer_id: null,
+                    referrals: [],
                     barangay_captain: null,
                     dependents: [],
                     neighbours: [],
@@ -499,7 +528,7 @@
                     city: null,
                     barangay: null,
                     province: null,
-                    otherSOI: null,
+                    other_SOI: null,
                     contact_num: null,
                     civil_status: null
                 },
@@ -604,18 +633,23 @@
             },
             storePerson(e) {
                 const form = new FormData(e.target);
-
-                if (e.target.id === 'dependent') {
+                let button_id = e.target.id;
+                if (button_id === 'dependent') {
                     const dependent = {};
                     dependent.name = form.get('dependentName');
                     dependent.relationship = JSON.parse(form.get('relationToBorrower'));
                     dependent.birthday = form.get('birthday');
                     this.borrower.dependents.push(dependent);
-                } else {
+                } else if(button_id === 'neighbour'){
                     const neighbour = {};
                     neighbour.name = form.get('neighbourName');
                     this.borrower.neighbours.push(neighbour);
+                } else if(button_id === 'referral'){
+                    const referral = {};
+                    referral.referral_name = form.get('referralName');
+                    this.borrower.referrals.push(referral);
                 }
+
                 this.modal = false;
             }
         }

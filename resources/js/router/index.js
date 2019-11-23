@@ -10,106 +10,102 @@ import LoansByPension from "../views/loan/LoansByPension";
 import ShowAllBorrowers from "../views/borrower/ShowAllBorrowers"
 import LoansAll from "../views/loan/LoansAll";
 import LoanByBorrower from "../views/loan/LoanByBorrower";
+import pension from "./pension";
+import print from "./print";
+Vue.use(Router);
 
-Vue.use(Router)
+const baseRoutes = [
+    {
+        path: '/dashboard',
+        name: 'Dashboard',
+        meta: {
+            requiresAuth: true
+        },
+        component: Dashboard,
+        alias: '/'
+    },
+    ...pension,
+    {
+        path: '/borrower/create',
+        name: 'BorrowerCreate',
+        meta: {
+            requiresAuth: true
+        },
+        component: BorrowerCreate
+    },
+    {
+        path: '/borrowers',
+        name: 'BorrowerAll',
+        meta: {
+            requiresAuth: true
+        },
+        component: ShowAllBorrowers
+    },
+    {
+        path: '/borrower/:borrower',
+        name: 'showBorrower',
+        meta: {
+            requiresAuth: true
+        },
+        component: ShowBorrower
+    },
+    {
+        path: '/borrower/:borrower/loans',
+        name: 'loansByBorrower',
+        meta: {
+            requiresAuth: true
+        },
+        props: { page: 232 },
+        component: LoanByBorrower
+    }
+    ,
+    {
+        path: '/pension/:pension/loans',
+        name: 'showLoansByPension',
+        meta: {
+            requiresAuth: true
+        },
+        component: LoansByPension
+    },
+    {
+        path: '/loan/create',
+        name: 'loanCreate',
+        meta: {
+            requiresAuth: true
+        },
+        component: LoanCreate
+    },
+    {
+        path: '/loan/:id',
+        name: 'loanShow',
+        meta: {
+            requiresAuth: true
+        },
+        component: LoanShow
+    },
+    {
+        path: '/loans',
+        name: 'LoansAll',
+        meta: {
+            requiresAuth: true
+        },
+        component: LoansAll
+    },
+    {
+        path: '/404',
+        name: 'BadGateway',
+        component: BadGateway
+    },
+    // {
+    //     path: '*',
+    //     redirect: '/404'
+    // }
+];
+
+const routes = baseRoutes.concat(pension,print);
 export const router =  new Router({
     mode: 'history',
-    routes: [
-        {
-            path: '/dashboard',
-            name: 'Dashboard',
-            meta: {
-                requiresAuth: true
-            },
-            component: Dashboard,
-            props: { page: 1 },
-            alias: '/'
-        },
-        {
-            path: '/borrower/create',
-            name: 'BorrowerCreate',
-            meta: {
-                requiresAuth: true
-            },
-            props: { page: 2 },
-            component: BorrowerCreate
-        },
-        {
-            path: '/borrowers',
-            name: 'BorrowerAll',
-            meta: {
-                requiresAuth: true
-            },
-            props: { page: 35 },
-            component: ShowAllBorrowers
-        },
-        {
-            path: '/borrower/:borrower',
-            name: 'showBorrower',
-            meta: {
-                requiresAuth: true
-            },
-            props: { page: 10 },
-            component: ShowBorrower
-        },
-        {
-            path: '/borrower/:borrower/loans',
-            name: 'loansByBorrower',
-            meta: {
-                requiresAuth: true
-            },
-            props: { page: 232 },
-            component: LoanByBorrower
-        }
-        ,
-        {
-            path: '/pension/:pension/loans',
-            name: 'showLoansByPension',
-            meta: {
-                requiresAuth: true
-            },
-            props: { page: 10 },
-            component: LoansByPension
-        },
-        {
-            path: '/loan/create',
-            name: 'loanCreate',
-            meta: {
-                requiresAuth: true
-            },
-            props: { page: 3 },
-            component: LoanCreate
-        },
-        {
-            path: '/loan/:id',
-            name: 'loanShow',
-            meta: {
-                requiresAuth: true
-            },
-            props: { page: 4 },
-            component: LoanShow
-        },
-        {
-            path: '/loans',
-            name: 'LoansAll',
-            meta: {
-                requiresAuth: true
-            },
-            props: { page: 34 },
-            component: LoansAll
-        },
-        {
-            path: '/404',
-            name: 'BadGateway',
-            props: { page: 5 },
-            component: BadGateway
-        },
-        {
-            path: '*',
-            props: { page: 5 },
-            redirect: '/404'
-        }
-    ]
+    routes
 });
 
 

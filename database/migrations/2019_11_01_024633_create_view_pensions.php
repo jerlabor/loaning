@@ -16,7 +16,7 @@ class CreateViewPensions extends Migration
     {
         DB::statement("
         CREATE OR REPLACE VIEW v_pensions AS
-SELECT p.id,borrower_id,pt.pension_type,b.bank,bt.bank_type,brgyDesc,payday,agency,pension FROM pensions p
+SELECT p.*,pt.pension_type,b.bank,bt.bank_type,brgyDesc,payday,agency,pension FROM pensions p
 JOIN pension_types pt ON p.pension_type = pt.id
 JOIN banks b ON p.pension_bank = b.id
 JOIN barangays brgy ON p.bank_branch = brgy.id

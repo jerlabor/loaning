@@ -38,6 +38,13 @@
                 <router-link :to="{name:'LoansAll'}">View All Loans</router-link>
                 <router-link to="/loan/create">Add Loan</router-link>
             </div>
+            <button class="dropdown-btn">Pensions
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <router-link :to="{name:'PensionAll'}">View Pensions</router-link>
+                <router-link :to="{name:'PensionCreateRoute'}">Add Pension</router-link>
+            </div>
             <button class="dropdown-btn">Collections
                 <i class="fa fa-caret-down"></i>
             </button>
@@ -45,6 +52,12 @@
                 <a href="#">Link 1</a>
                 <a href="#">Link 2</a>
                 <a href="#">Link 3</a>
+            </div>
+            <button class="dropdown-btn">Print
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <router-link :to="{name:'PLoanApplication'}">Loan Application</router-link>
             </div>
         </div>
         <!-- /Sidebar  -->

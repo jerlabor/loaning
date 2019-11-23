@@ -30,6 +30,7 @@ class StoreBorrower extends FormRequest
             'birthday' => 'required|max:255|date',
             'gender' => 'required|max:1',
             'referrer_id' => 'required|numeric',
+            'referrals' => 'required|array',
             'barangay_captain' => 'nullable|string|max:255',
             'street' => 'required|string',
             'city' => 'required|numeric',

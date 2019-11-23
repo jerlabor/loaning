@@ -20,7 +20,9 @@ Auth::routes(
     ]
 );
 
-
+Route::get('/print/test',function(){
+   return view('print.loan_application');
+});
 Route::post('/repayment','RepaymentController@store');
 Route::post('/borrower','BorrowerController@store');
 Route::post('/pension','PensionController@store');

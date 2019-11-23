@@ -11,7 +11,8 @@ class Loan extends Model
         'loan_type',
         'principal_amount',
         'release_date',
-        'term'
+        'term',
+        'borrower_id'
     ];
 
     protected $dates = ['release_date'];
@@ -60,6 +61,10 @@ class Loan extends Model
 
     public function pension(){
         return $this->belongsTo(\App\Pension::class,'pension_code');
+    }
+
+    public function borrower(){
+        return $this->belongsTo(\App\Borrower::class);
     }
 
     public function repayments(){
