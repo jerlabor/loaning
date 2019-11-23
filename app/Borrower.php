@@ -71,5 +71,9 @@ class Borrower extends Model
     public function referrals(){
         return $this->hasMany(\App\Referral::class);
     }
+
+    public function repayments(){
+        return $this->hasManyThrough(\App\Repayment::class,\App\Loan::class);
+    }
 }
 

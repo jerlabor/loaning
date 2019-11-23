@@ -74,4 +74,8 @@ class Loan extends Model
     public function repaymentSummary(){
         return $this->hasOne(\App\VRepaymentSummary::class)->withDefault(['total_paid' => 0]);
     }
+
+    public function loanType(){
+        return $this->belongsTo(\App\LoanType::class,'loan_type');
+    }
 }

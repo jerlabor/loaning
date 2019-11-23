@@ -61,7 +61,7 @@ class LoanController extends Controller
      */
     public function show(Loan $loan)
     {
-        return response()->json($loan->load(['pension',
+        return response()->json($loan->load(['pension','loanType:id,loan_type',
             'borrower:id,first_name,middle_name,last_name,birthday,created_at',
             'repayments.collector:id,name','repaymentSummary:loan_id,total_paid'])->setAppends(['due','balance','maturity_date']),Response::HTTP_OK);
     }

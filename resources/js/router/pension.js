@@ -1,6 +1,7 @@
 import PensionCreate from "../views/pension/PensionCreate";
 import PensionIndex from "../views/pension/PensionIndex";
 import PensionAll from "../views/pension/PensionAll";
+import PensionShow from "../views/pension/PensionShow";
 
 export default [
     {
@@ -20,7 +21,13 @@ export default [
                 path: 'create',
                 name: 'PensionCreateRoute',
                 component: PensionCreate,
-            }
+            },
+            {
+                path: ':pension',
+                name: 'PensionShow',
+                component: PensionShow,
+            },
+
         ]
     }
 ];

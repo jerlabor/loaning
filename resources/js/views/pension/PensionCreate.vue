@@ -144,28 +144,24 @@
             axiosGet(model) {
                 return axios.get(`/api/${model}`);
             },
-            storePension() {
-
+            storePension(e) {
+            e.preventDefault();
                 if (this.isProcessing) {
                     return
                 }
                 this.isProcessing = true;
                 axios.post('/pension', this.pension)
-                    .then(() =>{
-                        document.getElementById('storePensionFrm').reset();
-                        alert('Pension Added Successfully!');
+                    .then((res) =>{
+                        this.$router.push(`/pension/${res.data.id}`);
                     })
                     .catch(e => {
-                        let error_message;
-                        error_message = '';
 
-                        error_message += e.response.data.message;
-
-                        for (let error in e.response.data.errors) {
-                            error_message += e.response.data.errors[error];
+                        let message = e;
+                        if(e.errors){
+                            message = e.errors;
                         }
 
-                        alert(error_message);
+                        alert(message);
                     })
                     .finally(() => {
                         this.isProcessing = false;

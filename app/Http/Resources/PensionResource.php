@@ -19,7 +19,7 @@ class PensionResource extends JsonResource
             'id' => $this->id,
             'pension' => $this->pension,
             'links' => $this->links,
-            'label' => "$this->id ( $this->full_name - $this->pension_type )"
+            'label' => "$this->id ( $this->full_name - $this->pension_type_name )"
         ];
     }
 }

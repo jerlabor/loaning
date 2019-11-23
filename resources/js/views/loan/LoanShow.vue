@@ -43,6 +43,8 @@
                         <thead class="thead-light">
                         <tr>
                             <th scope="col">Loan#</th>
+                            <th scope="col">Pension#</th>
+                            <th scope="col">Type</th>
                             <th scope="col">Released</th>
                             <th scope="col">Maturity</th>
                             <th scope="col">Term</th>
@@ -55,6 +57,8 @@
                         <tbody>
                         <tr v-if="!isLoading">
                             <th scope="row">{{loan.id}}</th>
+                            <th scope="row"><a href=""><u>{{loan.pension_code}}</u></a></th>
+                            <th scope="row">{{loan.loan_type.loan_type}}</th>
                             <td>{{loan.release_date}}</td>
                             <td>{{loan.maturity_date}}</td>
                             <td>{{loan.term}}</td>

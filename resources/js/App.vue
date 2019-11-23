@@ -10,7 +10,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            John Edward R. Labor
+                            {{$store.getters.getAuthUser.name}}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" @click="logout">Logout</a>
@@ -42,7 +42,7 @@
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <router-link :to="{name:'PensionAll'}">View Pensions</router-link>
+                <router-link :to="{name:'PensionAll'}">View All Pensions</router-link>
                 <router-link :to="{name:'PensionCreateRoute'}">Add Pension</router-link>
             </div>
             <button class="dropdown-btn">Collections
@@ -50,8 +50,6 @@
             </button>
             <div class="dropdown-container">
                 <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
             </div>
             <button class="dropdown-btn">Print
                 <i class="fa fa-caret-down"></i>

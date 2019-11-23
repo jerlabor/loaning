@@ -2,10 +2,6 @@
     <div>
         <div class="card mt-3">
             <div class="card-body">
-                <router-link :to="{name:'PensionCreateRoute',params: {borrower: 10}}" class="btn btn-primary btn-sm mb-3" type="button">Add
-                    Pension
-                    <mdb-icon class="ml-1" icon="plus"/>
-                </router-link>
                 <div class="table-responsive">
                     <table class="table table-sm">
                         <thead>
